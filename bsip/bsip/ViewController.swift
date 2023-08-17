@@ -6,14 +6,21 @@
 //
 
 import UIKit
+import WebrtcLib
 
 class ViewController: UIViewController {
-
+        
         override func viewDidLoad() {
                 super.viewDidLoad()
-                // Do any additional setup after loading the view.
         }
-
-
+        
+        @IBAction func startVideoAction(_ sender: UIButton) {
+                var err:NSError?
+                WebrtcLibStartCamera(&err)
+                if err != nil{
+                        print("------->>>",err?.localizedDescription)
+                }
+        }
+        
 }
 

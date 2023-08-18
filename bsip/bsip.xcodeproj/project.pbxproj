@@ -8,9 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		692A2B5E2A8E53F50053BD83 /* webrtcLib.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 692A2B5D2A8E53F50053BD83 /* webrtcLib.xcframework */; };
+		697ECB8D2A8F74C800E2E07A /* VideoCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697ECB8C2A8F74C800E2E07A /* VideoCallViewController.swift */; };
+		697ECB912A8F753600E2E07A /* VideoCaptureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697ECB902A8F753600E2E07A /* VideoCaptureManager.swift */; };
+		697ECB982A8F756300E2E07A /* CMSampleBuffer+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697ECB922A8F756300E2E07A /* CMSampleBuffer+extension.swift */; };
+		697ECB992A8F756300E2E07A /* H264Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697ECB932A8F756300E2E07A /* H264Unit.swift */; };
+		697ECB9A2A8F756300E2E07A /* H264Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697ECB942A8F756300E2E07A /* H264Encoder.swift */; };
+		697ECB9B2A8F756300E2E07A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697ECB952A8F756300E2E07A /* ViewController.swift */; };
+		697ECB9C2A8F756300E2E07A /* H264Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697ECB962A8F756300E2E07A /* H264Converter.swift */; };
+		697ECB9D2A8F756300E2E07A /* NALUParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697ECB972A8F756300E2E07A /* NALUParser.swift */; };
 		69FA7D342A8E415500B9DF52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FA7D332A8E415500B9DF52 /* AppDelegate.swift */; };
 		69FA7D362A8E415500B9DF52 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FA7D352A8E415500B9DF52 /* SceneDelegate.swift */; };
-		69FA7D382A8E415500B9DF52 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FA7D372A8E415500B9DF52 /* ViewController.swift */; };
 		69FA7D3B2A8E415500B9DF52 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69FA7D392A8E415500B9DF52 /* Main.storyboard */; };
 		69FA7D3E2A8E415500B9DF52 /* bsip.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 69FA7D3C2A8E415500B9DF52 /* bsip.xcdatamodeld */; };
 		69FA7D402A8E415600B9DF52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69FA7D3F2A8E415600B9DF52 /* Assets.xcassets */; };
@@ -19,10 +26,17 @@
 
 /* Begin PBXFileReference section */
 		692A2B5D2A8E53F50053BD83 /* webrtcLib.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = webrtcLib.xcframework; path = bin/webrtcLib.xcframework; sourceTree = "<group>"; };
+		697ECB8C2A8F74C800E2E07A /* VideoCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCallViewController.swift; sourceTree = "<group>"; };
+		697ECB902A8F753600E2E07A /* VideoCaptureManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCaptureManager.swift; sourceTree = "<group>"; };
+		697ECB922A8F756300E2E07A /* CMSampleBuffer+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CMSampleBuffer+extension.swift"; sourceTree = "<group>"; };
+		697ECB932A8F756300E2E07A /* H264Unit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = H264Unit.swift; sourceTree = "<group>"; };
+		697ECB942A8F756300E2E07A /* H264Encoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = H264Encoder.swift; sourceTree = "<group>"; };
+		697ECB952A8F756300E2E07A /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		697ECB962A8F756300E2E07A /* H264Converter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = H264Converter.swift; sourceTree = "<group>"; };
+		697ECB972A8F756300E2E07A /* NALUParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NALUParser.swift; sourceTree = "<group>"; };
 		69FA7D302A8E415500B9DF52 /* bsip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bsip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69FA7D332A8E415500B9DF52 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		69FA7D352A8E415500B9DF52 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		69FA7D372A8E415500B9DF52 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		69FA7D3A2A8E415500B9DF52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		69FA7D3D2A8E415500B9DF52 /* bsip.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = bsip.xcdatamodel; sourceTree = "<group>"; };
 		69FA7D3F2A8E415600B9DF52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -42,6 +56,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		697ECB8F2A8F751700E2E07A /* try */ = {
+			isa = PBXGroup;
+			children = (
+				697ECB922A8F756300E2E07A /* CMSampleBuffer+extension.swift */,
+				697ECB962A8F756300E2E07A /* H264Converter.swift */,
+				697ECB942A8F756300E2E07A /* H264Encoder.swift */,
+				697ECB932A8F756300E2E07A /* H264Unit.swift */,
+				697ECB972A8F756300E2E07A /* NALUParser.swift */,
+				697ECB952A8F756300E2E07A /* ViewController.swift */,
+			);
+			path = try;
+			sourceTree = "<group>";
+		};
 		69FA7D272A8E415500B9DF52 = {
 			isa = PBXGroup;
 			children = (
@@ -62,9 +89,11 @@
 		69FA7D322A8E415500B9DF52 /* bsip */ = {
 			isa = PBXGroup;
 			children = (
+				697ECB902A8F753600E2E07A /* VideoCaptureManager.swift */,
+				697ECB8F2A8F751700E2E07A /* try */,
 				69FA7D332A8E415500B9DF52 /* AppDelegate.swift */,
 				69FA7D352A8E415500B9DF52 /* SceneDelegate.swift */,
-				69FA7D372A8E415500B9DF52 /* ViewController.swift */,
+				697ECB8C2A8F74C800E2E07A /* VideoCallViewController.swift */,
 				69FA7D392A8E415500B9DF52 /* Main.storyboard */,
 				69FA7D3F2A8E415600B9DF52 /* Assets.xcassets */,
 				69FA7D412A8E415600B9DF52 /* LaunchScreen.storyboard */,
@@ -153,9 +182,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69FA7D382A8E415500B9DF52 /* ViewController.swift in Sources */,
+				697ECB9D2A8F756300E2E07A /* NALUParser.swift in Sources */,
+				697ECB9A2A8F756300E2E07A /* H264Encoder.swift in Sources */,
 				69FA7D342A8E415500B9DF52 /* AppDelegate.swift in Sources */,
+				697ECB9C2A8F756300E2E07A /* H264Converter.swift in Sources */,
+				697ECB912A8F753600E2E07A /* VideoCaptureManager.swift in Sources */,
+				697ECB9B2A8F756300E2E07A /* ViewController.swift in Sources */,
 				69FA7D362A8E415500B9DF52 /* SceneDelegate.swift in Sources */,
+				697ECB982A8F756300E2E07A /* CMSampleBuffer+extension.swift in Sources */,
+				697ECB992A8F756300E2E07A /* H264Unit.swift in Sources */,
+				697ECB8D2A8F74C800E2E07A /* VideoCallViewController.swift in Sources */,
 				69FA7D3E2A8E415500B9DF52 /* bsip.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

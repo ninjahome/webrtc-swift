@@ -19,7 +19,7 @@ class VideoCallViewController: UIViewController {
         private let naluParser = NALUParser()
         private let h264Converter = H264Converter()
         
-        @IBOutlet var remoteSDP: UITextField!
+        @IBOutlet var remoteSDP: UITextView!
         
         override func viewDidLoad() {
                 super.viewDidLoad()
@@ -55,11 +55,11 @@ class VideoCallViewController: UIViewController {
                         captureManager.setVideoOutputDelegate(with: self)
                         
                         videoEncoder.naluHandling = { data in
-                                self.naluParser.enqueue(data)
-//                                WebrtcLibSendVideoToPeer(data, &err)
-//                                if let e = err{
-//                                        print("------>>>",e.localizedDescription)
-//                                }
+//                                self.naluParser.enqueue(data)
+                                WebrtcLibSendVideoToPeer(data, &err)
+                                if let e = err{
+                                        print("------>>>",e.localizedDescription)
+                                }
                         }
                         
                         

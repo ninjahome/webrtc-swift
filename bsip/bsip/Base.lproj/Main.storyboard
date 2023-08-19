@@ -25,28 +25,29 @@
                                     <action selector="startVedioAction:" destination="NQV-VK-knP" eventType="touchUpInside" id="qow-87-oLV"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FSW-n0-ztz">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ruu-qO-QEA">
                                 <rect key="frame" x="16" y="79" width="361" height="240"/>
                                 <color key="backgroundColor" red="0.90588235289999997" green="0.90588235289999997" blue="0.90588235289999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="240" id="6JP-0i-pzS"/>
+                                    <constraint firstAttribute="height" constant="240" id="8C6-4j-AwU"/>
                                 </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KLB-Mr-YCV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="M3J-nW-sYK" firstAttribute="centerX" secondItem="KLB-Mr-YCV" secondAttribute="centerX" id="9Ub-wF-sZf"/>
-                            <constraint firstItem="FSW-n0-ztz" firstAttribute="leading" secondItem="KLB-Mr-YCV" secondAttribute="leading" constant="16" id="Wvc-x4-7mE"/>
-                            <constraint firstItem="FSW-n0-ztz" firstAttribute="top" secondItem="KLB-Mr-YCV" secondAttribute="top" constant="20" id="l4Y-TS-wuX"/>
+                            <constraint firstItem="ruu-qO-QEA" firstAttribute="leading" secondItem="KLB-Mr-YCV" secondAttribute="leading" constant="16" id="Fbg-v1-0bh"/>
+                            <constraint firstItem="ruu-qO-QEA" firstAttribute="top" secondItem="KLB-Mr-YCV" secondAttribute="top" constant="20" id="Hvs-5F-GY3"/>
+                            <constraint firstItem="KLB-Mr-YCV" firstAttribute="trailing" secondItem="ruu-qO-QEA" secondAttribute="trailing" constant="16" id="YDz-Gu-Tvh"/>
                             <constraint firstItem="KLB-Mr-YCV" firstAttribute="bottom" secondItem="M3J-nW-sYK" secondAttribute="bottom" constant="60" id="os6-nO-aLb"/>
-                            <constraint firstItem="KLB-Mr-YCV" firstAttribute="trailing" secondItem="FSW-n0-ztz" secondAttribute="trailing" constant="16" id="qCQ-Xm-P4g"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="remoteSDP" destination="FSW-n0-ztz" id="VTs-GC-ssz"/>
+                        <outlet property="remoteSDP" destination="ruu-qO-QEA" id="zbd-5h-eVo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qzd-BK-8XJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -55,6 +56,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

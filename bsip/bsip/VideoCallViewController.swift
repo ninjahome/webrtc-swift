@@ -9,26 +9,73 @@ import UIKit
 import WebrtcLib
 import AVFoundation
 
-class VideoCallViewController: UIViewController{
-        private lazy var videoQueue = DispatchQueue.init(label: "videolayer.queue",
-                                                         qos: .userInteractive)
-        private lazy var convertQueue = DispatchQueue.init(label: "convert.queue",
-                                                           qos: .background)
+class VideoCallViewController: UIViewController {
         
-        private let layer = AVSampleBufferDisplayLayer()
+        private let selfLayer = AVSampleBufferDisplayLayer()
+        private let peerLayer = AVSampleBufferDisplayLayer()
         private lazy var captureManager = VideoCaptureManager()
+        private lazy var videoEncoder = H264Encoder()
+        
+        private let naluParser = NALUParser()
+        private let h264Converter = H264Converter()
+        
+        @IBOutlet var remoteSDP: UITextField!
         
         override func viewDidLoad() {
                 super.viewDidLoad()
-                layer.frame = view.frame
-                layer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+                self.hideKeyboardWhenTappedAround()
+                peerLayer.frame = view.frame
+                peerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+                
+                selfLayer.frame = CGRect(origin: CGPoint(x: 0,y: 0), size: CGSize(width: 72, height: 120))
         }
         
         @IBAction func startVedioAction(_ sender: UIButton) {
-                view.layer.addSublayer(layer)
-                captureManager.setVideoOutputDelegate(with: self)
+                peerLayer.addSublayer(selfLayer)
+                view.layer.addSublayer(peerLayer)
+                captureManager.setVideoOutputDelegate(with: videoEncoder)
+                showVideo()
         }
         
+        private func showVideo(){
+                guard let offer = remoteSDP.text else{
+                        return
+                }
+                
+                do {
+                        var err:NSError?
+                        WebrtcLibStartVideo(offer,self,&err)
+                        if let e = err{
+                                print("------>>>",e.localizedDescription)
+                                return
+                        }
+                        
+                        try videoEncoder.configureCompressSession()
+                        
+                        captureManager.setVideoOutputDelegate(with: self)
+                        
+                        videoEncoder.naluHandling = { data in
+                                self.naluParser.enqueue(data)
+//                                WebrtcLibSendVideoToPeer(data, &err)
+//                                if let e = err{
+//                                        print("------>>>",e.localizedDescription)
+//                                }
+                        }
+                        
+                        
+                        naluParser.h264UnitHandling = { [h264Converter] h264Unit in
+                                h264Converter.convert(h264Unit)
+                        }
+                        
+                        h264Converter.sampleBufferCallback = self.presentResult
+                        
+                }catch let err{
+                        print("------>>>",err.localizedDescription)
+                }
+        }
+        private  func presentResult(_ sample:CMSampleBuffer){
+                peerLayer.enqueue(sample)
+        }
         /*
          // MARK: - Navigation
          
@@ -40,36 +87,24 @@ class VideoCallViewController: UIViewController{
          */
 }
 
-extension VideoCallViewController:AVCaptureVideoDataOutputSampleBufferDelegate{
+
+extension VideoCallViewController: AVCaptureVideoDataOutputSampleBufferDelegate{
         func captureOutput(_ output: AVCaptureOutput,
                            didOutput sampleBuffer: CMSampleBuffer,
                            from connection: AVCaptureConnection) {
                 
-                guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else{
+                selfLayer.enqueue(sampleBuffer)
+                
+                videoEncoder.encode(buffer: sampleBuffer)
+        }
+}
+
+extension VideoCallViewController:WebrtcLibCallBackProtocol{
+        
+        func newVideoData(_ h264data: Data?) {
+                guard let data = h264data else{
                         return
                 }
-                
-                let ciimage = CIImage(cvPixelBuffer: imageBuffer)
-                let image = self.convert(cmage: ciimage)
-                let imgData = image.jpegData(compressionQuality: 1.0)!
-                videoQueue.async {
-                        self.layer.enqueue(sampleBuffer)
-                }
-                
-                convertQueue.async {
-
-                        var err:NSError?
-                        WebrtcLibFrameData(imgData, &err)
-                        if let e = err{
-                                print(e.localizedDescription)
-                        }
-                }
-        }
-        
-        func convert(cmage: CIImage) -> UIImage {
-                let context = CIContext(options: nil)
-                let cgImage = context.createCGImage(cmage, from: cmage.extent)!
-                let image = UIImage(cgImage: cgImage)
-                return image
+                naluParser.enqueue(data)
         }
 }

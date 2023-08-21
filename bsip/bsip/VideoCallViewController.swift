@@ -18,8 +18,11 @@ class VideoCallViewController: UIViewController {
         
         private let naluParser = NALUParser()
         private let h264Converter = H264Converter()
+//        private var h264Decoder: VideoDecoder!
         
         @IBOutlet var remoteSDP: UITextView!
+        
+//        private var cacher:NALUParser2!
         
         override func viewDidLoad() {
                 super.viewDidLoad()
@@ -28,6 +31,9 @@ class VideoCallViewController: UIViewController {
                 peerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
                 
                 selfLayer.frame = CGRect(origin: CGPoint(x: 0,y: 0), size: CGSize(width: 72, height: 120))
+                
+//                h264Decoder = H264Decoder(delegate: self)
+//                cacher = NALUParser2(decoder:h264Decoder)
         }
         
         @IBAction func startVedioAction(_ sender: UIButton) {
@@ -66,7 +72,7 @@ class VideoCallViewController: UIViewController {
                         naluParser.h264UnitHandling = { [h264Converter] h264Unit in
                                 h264Converter.convert(h264Unit)
                         }
-                        
+
                         h264Converter.sampleBufferCallback = self.presentResult
                         
                 }catch let err{
@@ -105,6 +111,8 @@ extension VideoCallViewController:WebrtcLibCallBackProtocol{
                 guard let data = h264data else{
                         return
                 }
+                
                 naluParser.enqueue(data)
         }
 }
+

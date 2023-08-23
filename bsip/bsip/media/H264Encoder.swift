@@ -28,7 +28,8 @@ class H264Encoder: NSObject {
         var naluHandling: ((Data) -> Void)?
         
         // MARK: - init
-        
+        lazy var encoderQueue = DispatchQueue.init(label: "encoder.queue",
+                                                           qos: .userInteractive)
         override init() {
                 super.init()
         }
@@ -66,7 +67,7 @@ class H264Encoder: NSObject {
                         throw ConfigurationError.cannotPrepareToEncode
                 }
                 
-                print("VTCompressSession is ready to use")
+                print("------>>>VTCompressSession is ready to use")
         }
         
         private var encodingOutputCallback: VTCompressionOutputCallback = { (outputCallbackRefCon: UnsafeMutableRawPointer?, _: UnsafeMutableRawPointer?, status: OSStatus, flags: VTEncodeInfoFlags, sampleBuffer: CMSampleBuffer?) in

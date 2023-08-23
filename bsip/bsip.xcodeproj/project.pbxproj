@@ -13,7 +13,6 @@
 		697ECB982A8F756300E2E07A /* CMSampleBuffer+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697ECB922A8F756300E2E07A /* CMSampleBuffer+extension.swift */; };
 		697ECB992A8F756300E2E07A /* H264Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697ECB932A8F756300E2E07A /* H264Unit.swift */; };
 		697ECB9A2A8F756300E2E07A /* H264Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697ECB942A8F756300E2E07A /* H264Encoder.swift */; };
-		697ECB9C2A8F756300E2E07A /* H264Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697ECB962A8F756300E2E07A /* H264Converter.swift */; };
 		697ECB9D2A8F756300E2E07A /* NALUParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697ECB972A8F756300E2E07A /* NALUParser.swift */; };
 		69EA25BA2A907B3B007DA7F8 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 69EA25B92A907B26007DA7F8 /* libresolv.tbd */; };
 		69EA25BC2A907C5A007DA7F8 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA25BB2A907C5A007DA7F8 /* Util.swift */; };
@@ -32,7 +31,6 @@
 		697ECB922A8F756300E2E07A /* CMSampleBuffer+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CMSampleBuffer+extension.swift"; sourceTree = "<group>"; };
 		697ECB932A8F756300E2E07A /* H264Unit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = H264Unit.swift; sourceTree = "<group>"; };
 		697ECB942A8F756300E2E07A /* H264Encoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = H264Encoder.swift; sourceTree = "<group>"; };
-		697ECB962A8F756300E2E07A /* H264Converter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = H264Converter.swift; sourceTree = "<group>"; };
 		697ECB972A8F756300E2E07A /* NALUParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NALUParser.swift; sourceTree = "<group>"; };
 		69EA25B92A907B26007DA7F8 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		69EA25BB2A907C5A007DA7F8 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
@@ -63,7 +61,6 @@
 			isa = PBXGroup;
 			children = (
 				697ECB922A8F756300E2E07A /* CMSampleBuffer+extension.swift */,
-				697ECB962A8F756300E2E07A /* H264Converter.swift */,
 				697ECB942A8F756300E2E07A /* H264Encoder.swift */,
 				697ECB932A8F756300E2E07A /* H264Unit.swift */,
 				697ECB972A8F756300E2E07A /* NALUParser.swift */,
@@ -190,7 +187,6 @@
 				697ECB9D2A8F756300E2E07A /* NALUParser.swift in Sources */,
 				697ECB9A2A8F756300E2E07A /* H264Encoder.swift in Sources */,
 				69FA7D342A8E415500B9DF52 /* AppDelegate.swift in Sources */,
-				697ECB9C2A8F756300E2E07A /* H264Converter.swift in Sources */,
 				697ECB912A8F753600E2E07A /* VideoCaptureManager.swift in Sources */,
 				69FA7D362A8E415500B9DF52 /* SceneDelegate.swift in Sources */,
 				697ECB982A8F756300E2E07A /* CMSampleBuffer+extension.swift in Sources */,

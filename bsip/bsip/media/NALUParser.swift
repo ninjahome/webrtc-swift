@@ -89,7 +89,7 @@ class NALUParser {
                 }
                 self.sps = nil
                 self.pps = nil
-                print("------>>>creat description success:")
+//                print("------>>>creat description success:")
         }
         
         

@@ -59,9 +59,11 @@ class VideoCallViewController: UIViewController {
                         captureManager.setVideoOutputDelegate(with: self)
                         
                         videoEncoder.naluHandling = { data in
-                                WebrtcLibSendVideoToPeer(data, &err)
-                                if let e = err{
-                                        print("------>>>",e.localizedDescription)
+                                self.videoEncoder.encoderQueue.async {
+                                        WebrtcLibSendVideoToPeer(data, &err)
+                                        if let e = err{
+                                                print("------>>>",e.localizedDescription)
+                                        }
                                 }
                         }
                         
@@ -98,6 +100,10 @@ extension VideoCallViewController: AVCaptureVideoDataOutputSampleBufferDelegate{
 }
 
 extension VideoCallViewController:WebrtcLibCallBackProtocol{
+        func p2pConnected() {
+                
+        }
+        
         func newVideoData(_ typ: Int, h264data: Data?) {
                 
                 guard let data = h264data else{

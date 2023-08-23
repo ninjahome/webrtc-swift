@@ -15,13 +15,9 @@ class VideoCallViewController: UIViewController {
         private let peerLayer = AVSampleBufferDisplayLayer()
         private lazy var captureManager = VideoCaptureManager()
         private lazy var videoEncoder = H264Encoder()
-        
         private let naluParser = NALUParser()
-        //        private let h264Converter = H264Converter()
         
         @IBOutlet var remoteSDP: UITextView!
-        
-        //        private var cacher:NALUParser2!
         
         override func viewDidLoad() {
                 super.viewDidLoad()
@@ -31,14 +27,28 @@ class VideoCallViewController: UIViewController {
                 
                 selfLayer.frame = CGRect(origin: CGPoint(x: 0,y: 0), size: CGSize(width: 72, height: 120))
                 
-                
         }
+        
+        
         
         @IBAction func startVedioAction(_ sender: UIButton) {
                 peerLayer.addSublayer(selfLayer)
                 view.layer.addSublayer(peerLayer)
                 captureManager.setVideoOutputDelegate(with: videoEncoder)
                 showVideo()
+        }
+        
+        @IBAction func TestFileAction(_ sender: UIButton) {
+                view.layer.addSublayer(peerLayer)
+                
+                let filePath = Bundle.main.path(forResource: "offer", ofType: "h264")
+                let url = URL(fileURLWithPath: filePath!)
+                let videoReader = VideoFileReader()
+                videoReader.callback = self
+                videoReader.filequeue.async {
+                        videoReader.openVideoFile(url)
+                }
+                naluParser.sampleBufferCallback = self.presentResult
         }
         
         private func showVideo(){
@@ -73,9 +83,11 @@ class VideoCallViewController: UIViewController {
                         print("------>>>",err.localizedDescription)
                 }
         }
+        
         private  func presentResult(_ sample:CMSampleBuffer){
                 peerLayer.enqueue(sample)
         }
+        
         /*
          // MARK: - Navigation
          

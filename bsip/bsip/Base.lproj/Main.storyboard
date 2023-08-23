@@ -35,14 +35,29 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OpR-HT-As2">
+                                <rect key="frame" x="20" y="603" width="353" height="60"/>
+                                <color key="backgroundColor" red="1" green="0.47051429750000001" blue="0.16774335500000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="30s-M0-9bh"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="TRest"/>
+                                <connections>
+                                    <action selector="TestFileAction:" destination="NQV-VK-knP" eventType="touchUpInside" id="Brl-Kh-hSz"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KLB-Mr-YCV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="OpR-HT-As2" firstAttribute="leading" secondItem="KLB-Mr-YCV" secondAttribute="leading" constant="20" id="5Yi-7T-DTb"/>
                             <constraint firstItem="M3J-nW-sYK" firstAttribute="centerX" secondItem="KLB-Mr-YCV" secondAttribute="centerX" id="9Ub-wF-sZf"/>
                             <constraint firstItem="ruu-qO-QEA" firstAttribute="leading" secondItem="KLB-Mr-YCV" secondAttribute="leading" constant="16" id="Fbg-v1-0bh"/>
                             <constraint firstItem="ruu-qO-QEA" firstAttribute="top" secondItem="KLB-Mr-YCV" secondAttribute="top" constant="20" id="Hvs-5F-GY3"/>
+                            <constraint firstItem="M3J-nW-sYK" firstAttribute="top" secondItem="OpR-HT-As2" secondAttribute="bottom" constant="60" id="Olx-1K-UwP"/>
                             <constraint firstItem="KLB-Mr-YCV" firstAttribute="trailing" secondItem="ruu-qO-QEA" secondAttribute="trailing" constant="16" id="YDz-Gu-Tvh"/>
+                            <constraint firstItem="KLB-Mr-YCV" firstAttribute="trailing" secondItem="OpR-HT-As2" secondAttribute="trailing" constant="20" id="ecP-FD-N3p"/>
                             <constraint firstItem="KLB-Mr-YCV" firstAttribute="bottom" secondItem="M3J-nW-sYK" secondAttribute="bottom" constant="60" id="os6-nO-aLb"/>
                         </constraints>
                     </view>

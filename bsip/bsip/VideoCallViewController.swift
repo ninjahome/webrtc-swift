@@ -58,7 +58,7 @@ class VideoCallViewController: UIViewController {
                 
                 do {
                         var err:NSError?
-                        WebrtcLibStartVideo(offer,self,&err)
+                        WebrtcLibAnswerVideo(offer,self,&err)
                         if let e = err{
                                 print("------>>>",e.localizedDescription)
                                 return

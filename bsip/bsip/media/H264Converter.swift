@@ -80,18 +80,18 @@ class H264Converter {
     }
     
     private func createBlockBuffer(with h264Format: H264Unit) -> CMBlockBuffer? {
-        let pointer = UnsafeMutablePointer<UInt8>.allocate(capacity: h264Format.data.count)
+        let pointer = UnsafeMutablePointer<UInt8>.allocate(capacity: h264Format.payload.count)
         
-        h264Format.data.copyBytes(to: pointer, count: h264Format.data.count)
+        h264Format.payload.copyBytes(to: pointer, count: h264Format.payload.count)
         var blockBuffer: CMBlockBuffer?
         
         let error = CMBlockBufferCreateWithMemoryBlock(allocator: kCFAllocatorDefault,
                                                        memoryBlock: pointer,
-                                                       blockLength: h264Format.data.count,
+                                                       blockLength: h264Format.payload.count,
                                                        blockAllocator: kCFAllocatorDefault,
                                                        customBlockSource: nil,
                                                        offsetToData: 0,
-                                                       dataLength: h264Format.data.count,
+                                                       dataLength: h264Format.payload.count,
                                                        flags: .zero,
                                                        blockBufferOut: &blockBuffer)
         
@@ -104,37 +104,37 @@ class H264Converter {
     }
     
     private func createDescription(with h264Format: H264Unit) {
-        if h264Format.type == .sps {
-            sps = h264Format
-        } else if h264Format.type == .pps {
-            pps = h264Format
-        }
-        
-        guard let sps = sps,
-              let pps = pps else {
-            return
-        }
-        
-        let spsPointer = UnsafeMutablePointer<UInt8>.allocate(capacity: sps.data.count)
-        sps.data.copyBytes(to: spsPointer, count: sps.data.count)
-        
-        let ppsPointer = UnsafeMutablePointer<UInt8>.allocate(capacity: pps.data.count)
-        pps.data.copyBytes(to: ppsPointer, count: pps.data.count)
-                
-        let parameterSet = [UnsafePointer(spsPointer), UnsafePointer(ppsPointer)]
-        let parameterSetSizes = [sps.data.count, pps.data.count]
-        
-        defer {
-            parameterSet.forEach {
-                $0.deallocate()
-            }
-        }
-                        
-        CMVideoFormatDescriptionCreateFromH264ParameterSets(allocator: kCFAllocatorDefault,
-                                                            parameterSetCount: 2,
-                                                            parameterSetPointers: parameterSet,
-                                                            parameterSetSizes: parameterSetSizes,
-                                                            nalUnitHeaderLength: 4,
-                                                            formatDescriptionOut: &description)
+//        if h264Format.type == .sps {
+//            sps = h264Format
+//        } else if h264Format.type == .pps {
+//            pps = h264Format
+//        }
+//
+//        guard let sps = sps,
+//              let pps = pps else {
+//            return
+//        }
+//
+//        let spsPointer = UnsafeMutablePointer<UInt8>.allocate(capacity: sps.data.count)
+//        sps.data.copyBytes(to: spsPointer, count: sps.data.count)
+//
+//        let ppsPointer = UnsafeMutablePointer<UInt8>.allocate(capacity: pps.data.count)
+//        pps.data.copyBytes(to: ppsPointer, count: pps.data.count)
+//
+//        let parameterSet = [UnsafePointer(spsPointer), UnsafePointer(ppsPointer)]
+//        let parameterSetSizes = [sps.data.count, pps.data.count]
+//
+//        defer {
+//            parameterSet.forEach {
+//                $0.deallocate()
+//            }
+//        }
+//
+//        CMVideoFormatDescriptionCreateFromH264ParameterSets(allocator: kCFAllocatorDefault,
+//                                                            parameterSetCount: 2,
+//                                                            parameterSetPointers: parameterSet,
+//                                                            parameterSetSizes: parameterSetSizes,
+//                                                            nalUnitHeaderLength: 4,
+//                                                            formatDescriptionOut: &description)
     }
 }

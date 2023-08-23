@@ -17,12 +17,11 @@ class VideoCallViewController: UIViewController {
         private lazy var videoEncoder = H264Encoder()
         
         private let naluParser = NALUParser()
-        private let h264Converter = H264Converter()
-//        private var h264Decoder: VideoDecoder!
+        //        private let h264Converter = H264Converter()
         
         @IBOutlet var remoteSDP: UITextView!
         
-//        private var cacher:NALUParser2!
+        //        private var cacher:NALUParser2!
         
         override func viewDidLoad() {
                 super.viewDidLoad()
@@ -32,8 +31,7 @@ class VideoCallViewController: UIViewController {
                 
                 selfLayer.frame = CGRect(origin: CGPoint(x: 0,y: 0), size: CGSize(width: 72, height: 120))
                 
-//                h264Decoder = H264Decoder(delegate: self)
-//                cacher = NALUParser2(decoder:h264Decoder)
+                
         }
         
         @IBAction func startVedioAction(_ sender: UIButton) {
@@ -61,19 +59,13 @@ class VideoCallViewController: UIViewController {
                         captureManager.setVideoOutputDelegate(with: self)
                         
                         videoEncoder.naluHandling = { data in
-//                                self.naluParser.enqueue(data)
                                 WebrtcLibSendVideoToPeer(data, &err)
                                 if let e = err{
                                         print("------>>>",e.localizedDescription)
                                 }
                         }
                         
-                        
-                        naluParser.h264UnitHandling = { [h264Converter] h264Unit in
-                                h264Converter.convert(h264Unit)
-                        }
-
-                        h264Converter.sampleBufferCallback = self.presentResult
+                        naluParser.sampleBufferCallback = self.presentResult
                         
                 }catch let err{
                         print("------>>>",err.localizedDescription)
@@ -106,13 +98,13 @@ extension VideoCallViewController: AVCaptureVideoDataOutputSampleBufferDelegate{
 }
 
 extension VideoCallViewController:WebrtcLibCallBackProtocol{
-        
-        func newVideoData(_ h264data: Data?) {
+        func newVideoData(_ typ: Int, h264data: Data?) {
+                
                 guard let data = h264data else{
                         return
                 }
                 
-                naluParser.enqueue(data)
+                naluParser.enqueue(typ, data)
         }
 }
 

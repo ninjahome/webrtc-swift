@@ -195,7 +195,6 @@ extension H264Encoder: AVCaptureVideoDataOutputSampleBufferDelegate {
                            didOutput sampleBuffer: CMSampleBuffer,
                            from connection: AVCaptureConnection) {
                 
-                encode(buffer: sampleBuffer)
-
+                encode(buffer: sampleBuffer) 
         }
 }

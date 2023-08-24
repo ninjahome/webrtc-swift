@@ -8,7 +8,8 @@
 import Foundation
 import UIKit
 
-let NotifyAppBecomeActive = NSNotification.Name(rawValue:"app_become_active")
+let NotifySceneBecomeActive = NSNotification.Name(rawValue:"scene_become_active")
+let NotifySceneDidEnterBackground = NSNotification.Name(rawValue:"scene_did_enter_background")
 
 extension UIViewController {
         

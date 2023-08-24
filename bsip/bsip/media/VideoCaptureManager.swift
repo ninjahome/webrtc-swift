@@ -144,6 +144,10 @@ class VideoCaptureManager {
                 return self.session.isRunning
         }
         
+        func isInter() ->Bool{
+                return self.session.isInterrupted
+        }
+        
         func startSession() {
                 
                 switch self.setupResult {

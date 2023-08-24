@@ -11,8 +11,8 @@ import AVFoundation
 
 class VideoCallViewController: UIViewController {
         
-        private let selfLayer = AVSampleBufferDisplayLayer()
-        private let peerLayer = AVSampleBufferDisplayLayer()
+        private var selfLayer = AVSampleBufferDisplayLayer()
+        private var peerLayer = AVSampleBufferDisplayLayer()
         private lazy var captureManager = VideoCaptureManager()
         private lazy var videoEncoder = H264Encoder()
         private let naluParser = NALUParser()
@@ -22,26 +22,46 @@ class VideoCallViewController: UIViewController {
         override func viewDidLoad() {
                 super.viewDidLoad()
                 self.hideKeyboardWhenTappedAround()
-                peerLayer.frame = view.frame
-                peerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
                 
-                selfLayer.frame = CGRect(origin: CGPoint(x: 0,y: 0), size: CGSize(width: 72, height: 120))
                 
                 captureManager.setVideoOutputDelegate(with: self)
                 videoEncoder.naluHandling = self.compressedData
                 naluParser.sampleBufferCallback = self.presentResult
                 
+                
                 NotificationCenter.default.addObserver(self,
                                                        selector:#selector(checkCallSession(notification:)),
-                                                       name: NotifyAppBecomeActive,
+                                                       name: NotifySceneBecomeActive,
                                                        object: nil)
+                
+                NotificationCenter.default.addObserver(self,
+                                                       selector:#selector(removLayers(notification:)),
+                                                       name: NotifySceneDidEnterBackground,
+                                                       object: nil)
+                setupLayer()
+        }
+        
+        private func setupLayer(){
+                selfLayer = AVSampleBufferDisplayLayer()
+                peerLayer = AVSampleBufferDisplayLayer()
+                peerLayer.frame = view.frame
+                peerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+                selfLayer.frame = CGRect(origin: CGPoint(x: 0,y: 0), size: CGSize(width: 72, height: 120))
         }
         
         @objc func checkCallSession(notification: NSNotification) {
-                print("------>>>isrunning:=>",captureManager.running())
-                if captureManager.running(){
+                print("------>>>isrunning:=>",captureManager.running(), captureManager.isInter())
+                setupLayer()
+                if captureManager.running()||captureManager.isInter(){
                         try? videoEncoder.configureCompressSession()
+                        view.layer.addSublayer(peerLayer)
+                        view.layer.addSublayer(selfLayer)
                 }
+        }
+        
+        @objc func removLayers(notification: NSNotification) {
+                self.peerLayer.removeFromSuperlayer()
+                self.selfLayer.removeFromSuperlayer()
         }
 
         
@@ -56,8 +76,8 @@ class VideoCallViewController: UIViewController {
         
         @IBAction func startVideoAction(_ sender: UIButton) {
                 
-                peerLayer.addSublayer(selfLayer)
                 view.layer.addSublayer(peerLayer)
+                view.layer.addSublayer(selfLayer)
                 
                 do{
                         var err:NSError?
@@ -89,8 +109,8 @@ class VideoCallViewController: UIViewController {
                         return
                 }
                 
-                peerLayer.addSublayer(selfLayer)
                 view.layer.addSublayer(peerLayer)
+                view.layer.addSublayer(selfLayer)
                 
                 
                 do {
@@ -145,7 +165,7 @@ extension VideoCallViewController: AVCaptureVideoDataOutputSampleBufferDelegate{
                            from connection: AVCaptureConnection) {
                 
                 selfLayer.enqueue(sampleBuffer)
-                
+//                peerLayer.enqueue(sampleBuffer)
                 videoEncoder.encode(buffer: sampleBuffer)
         }
 }

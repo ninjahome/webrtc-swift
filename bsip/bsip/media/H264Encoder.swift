@@ -37,8 +37,8 @@ class H264Encoder: NSObject {
         
         func configureCompressSession() throws {
                 let error = VTCompressionSessionCreate(allocator: kCFAllocatorDefault,
-                                                       width: Int32(720),
-                                                       height: Int32(1280),
+                                                       width: Int32(360),
+                                                       height: Int32(640),
                                                        codecType: kCMVideoCodecType_H264,
                                                        encoderSpecification: nil,
                                                        imageBufferAttributes: nil,
@@ -54,7 +54,7 @@ class H264Encoder: NSObject {
                 
                 let propertyDictionary = [
                         kVTCompressionPropertyKey_ProfileLevel: kVTProfileLevel_H264_Baseline_AutoLevel,
-                        kVTCompressionPropertyKey_MaxKeyFrameInterval: 60,
+                        kVTCompressionPropertyKey_MaxKeyFrameInterval: 30,
                         kVTCompressionPropertyKey_RealTime: true,
                         kVTCompressionPropertyKey_Quality: 0.5,
                 ] as [CFString : Any] as CFDictionary

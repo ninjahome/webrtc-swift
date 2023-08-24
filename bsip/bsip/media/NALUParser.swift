@@ -25,12 +25,12 @@ class NALUParser {
                 switch typ{
                 case 7:
                         sps = H264Unit(type: .sps, payload: data)
-                        print("------>>>found sps:",data)
+//                        print("------>>>found sps:",data)
                         createDescription()
                         return
                 case 8:
                         pps = H264Unit(type: .pps, payload: data)
-                        print("------>>>found pps:",data)
+//                        print("------>>>found pps:",data)
                         createDescription()
                         return
                 default:

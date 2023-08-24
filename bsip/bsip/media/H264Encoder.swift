@@ -187,15 +187,3 @@ class H264Encoder: NSObject {
                                                 infoFlagsOut: nil)
         }
 }
-
-// MARK: - AVCaptureVideoDataOutputSampleBufferDelegate
-extension H264Encoder: AVCaptureVideoDataOutputSampleBufferDelegate {
-        
-        // a point to receive raw video data
-        func captureOutput(_ output: AVCaptureOutput,
-                           didOutput sampleBuffer: CMSampleBuffer,
-                           from connection: AVCaptureConnection) {
-                
-                encode(buffer: sampleBuffer) 
-        }
-}

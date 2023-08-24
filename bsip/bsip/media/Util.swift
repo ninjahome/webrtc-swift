@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 
+let NotifyAppBecomeActive = NSNotification.Name(rawValue:"app_become_active")
+
 extension UIViewController {
         
         @objc func dismissKeyboard() {

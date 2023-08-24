@@ -27,15 +27,87 @@ class VideoCallViewController: UIViewController {
                 
                 selfLayer.frame = CGRect(origin: CGPoint(x: 0,y: 0), size: CGSize(width: 72, height: 120))
                 
+                captureManager.setVideoOutputDelegate(with: self)
+                videoEncoder.naluHandling = self.compressedData
+                naluParser.sampleBufferCallback = self.presentResult
+                
+                NotificationCenter.default.addObserver(self,
+                                                       selector:#selector(checkCallSession(notification:)),
+                                                       name: NotifyAppBecomeActive,
+                                                       object: nil)
+        }
+        
+        @objc func checkCallSession(notification: NSNotification) {
+                print("------>>>isrunning:=>",captureManager.running())
+                if captureManager.running(){
+                        try? videoEncoder.configureCompressSession()
+                }
+        }
+
+        
+        @IBAction func setupCalleeAnswer(_ sender: UIButton) {
+                guard let offer = remoteSDP.text else{
+                        print("------>>> callee answer is empty")
+                        return
+                }
+                WebrtcLibSetAnswerForOffer(offer)
         }
         
         
-        
-        @IBAction func startVedioAction(_ sender: UIButton) {
+        @IBAction func startVideoAction(_ sender: UIButton) {
+                
                 peerLayer.addSublayer(selfLayer)
                 view.layer.addSublayer(peerLayer)
-                captureManager.setVideoOutputDelegate(with: videoEncoder)
-                showVideo()
+                
+                do{
+                        var err:NSError?
+                        WebrtcLibStartVideo(self, &err)
+                        if let e = err{
+                                throw e
+                        }
+                        try videoEncoder.configureCompressSession()
+                        captureManager.startSession()
+                        
+                }catch let e{
+                        print("------>>>startVideoAction:",e.localizedDescription)
+                }
+        }
+        
+        private func compressedData(data:Data){
+                self.videoEncoder.encoderQueue.async {//TODO::change this queue to lib queue
+                        var err:NSError?
+                        WebrtcLibSendVideoToPeer(data, &err)
+                        if let e = err{
+                                print("------>>>send video err:",e.localizedDescription)
+                        }
+                }
+        }
+        
+        @IBAction func answerVideoAction(_ sender: Any) {
+                guard let offer = remoteSDP.text else{
+                        print("------>>> setup answer is empty")
+                        return
+                }
+                
+                peerLayer.addSublayer(selfLayer)
+                view.layer.addSublayer(peerLayer)
+                
+                
+                do {
+                        var err:NSError?
+                        WebrtcLibAnswerVideo(offer,self,&err)
+                        if let e = err{
+                                throw e
+                        }
+                        
+                        try videoEncoder.configureCompressSession()
+                        captureManager.startSession()
+                        
+                        
+                }catch let err{
+                        print("------>>>answerVideoAction:",err.localizedDescription)
+                }
+                
         }
         
         @IBAction func TestFileAction(_ sender: UIButton) {
@@ -49,39 +121,6 @@ class VideoCallViewController: UIViewController {
                         videoReader.openVideoFile(url)
                 }
                 naluParser.sampleBufferCallback = self.presentResult
-        }
-        
-        private func showVideo(){
-                guard let offer = remoteSDP.text else{
-                        return
-                }
-                
-                do {
-                        var err:NSError?
-                        WebrtcLibAnswerVideo(offer,self,&err)
-                        if let e = err{
-                                print("------>>>",e.localizedDescription)
-                                return
-                        }
-                        
-                        try videoEncoder.configureCompressSession()
-                        
-                        captureManager.setVideoOutputDelegate(with: self)
-                        
-                        videoEncoder.naluHandling = { data in
-                                self.videoEncoder.encoderQueue.async {
-                                        WebrtcLibSendVideoToPeer(data, &err)
-                                        if let e = err{
-                                                print("------>>>",e.localizedDescription)
-                                        }
-                                }
-                        }
-                        
-                        naluParser.sampleBufferCallback = self.presentResult
-                        
-                }catch let err{
-                        print("------>>>",err.localizedDescription)
-                }
         }
         
         private  func presentResult(_ sample:CMSampleBuffer){
@@ -112,9 +151,24 @@ extension VideoCallViewController: AVCaptureVideoDataOutputSampleBufferDelegate{
 }
 
 extension VideoCallViewController:WebrtcLibCallBackProtocol{
-        func p2pConnected() {
-                
+        
+        func answerCreated(_ p0: String?) {
+                guard let answer = p0 else{
+                        WebrtcLibEndCall()
+                        return
+                }
+                print(answer)
         }
+        
+        func offerCreated(_ p0: String?) {
+                guard let offer = p0 else{
+                        WebrtcLibEndCall()
+                        return
+                }
+                
+                print(offer)
+        }
+        
         
         func newVideoData(_ typ: Int, h264data: Data?) {
                 

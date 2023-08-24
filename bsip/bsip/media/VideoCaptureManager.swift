@@ -43,10 +43,6 @@ class VideoCaptureManager {
                 sessionQueue.async {
                         self.configureSession()
                 }
-                
-                sessionQueue.async {
-                        self.startSessionIfPossible()
-                }
         }
         
         private func requestCameraAuthorizationIfNeeded() {
@@ -144,10 +140,18 @@ class VideoCaptureManager {
                 session.commitConfiguration()
         }
         
-        private func startSessionIfPossible() {
+        func running() ->Bool{
+                return self.session.isRunning
+        }
+        
+        func startSession() {
+                
                 switch self.setupResult {
                 case .success:
-                        session.startRunning()
+                        
+                        sessionQueue.async {
+                                self.session.startRunning()
+                        }
                 case .notAuthorized:
                         print("camera usage not authorized")
                 case .configurationFailed:

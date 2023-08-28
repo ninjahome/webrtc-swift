@@ -12,7 +12,7 @@ class NALUParser {
         
         private var dataStream = Data()
         
-        private lazy var parsingQueue = DispatchQueue.init(label: "parsing.queue",
+        lazy var parsingQueue = DispatchQueue.init(label: "parsing.queue",
                                                            qos: .userInteractive)
         var sampleBufferCallback: ((CMSampleBuffer) -> Void)?
         private var sps: H264Unit?

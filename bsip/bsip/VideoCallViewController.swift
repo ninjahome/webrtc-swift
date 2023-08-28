@@ -195,8 +195,9 @@ extension VideoCallViewController:WebrtcLibCallBackProtocol{
                 guard let data = h264data else{
                         return
                 }
-                
-                naluParser.enqueue(typ, data)
+                naluParser.parsingQueue.async {
+                        self.naluParser.enqueue(typ, data)
+                }
         }
 }
 

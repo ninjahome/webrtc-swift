@@ -54,7 +54,7 @@ class H264Encoder: NSObject {
                 
                 let propertyDictionary = [
                         kVTCompressionPropertyKey_ProfileLevel: kVTProfileLevel_H264_Baseline_AutoLevel,
-                        kVTCompressionPropertyKey_MaxKeyFrameInterval: 60,
+                        kVTCompressionPropertyKey_MaxKeyFrameInterval: 30,
                         kVTCompressionPropertyKey_RealTime: true,
                         kVTCompressionPropertyKey_Quality: 0.5,
                 ] as [CFString : Any] as CFDictionary

@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M3J-nW-sYK">
-                                <rect key="frame" x="141.66666666666666" y="723" width="110" height="35"/>
+                                <rect key="frame" x="41.666666666666657" y="723" width="110" height="35"/>
                                 <color key="backgroundColor" systemColor="systemPinkColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Start Video"/>
@@ -73,13 +73,24 @@
                                     <action selector="setupCalleeAnswer:" destination="NQV-VK-knP" eventType="touchUpInside" id="hhp-MO-ZNT"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fjv-k4-F6c">
+                                <rect key="frame" x="253" y="723" width="120" height="35"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Called Video"/>
+                                <connections>
+                                    <action selector="startCalledVideoAction:" destination="NQV-VK-knP" eventType="touchUpInside" id="Mgl-dy-6qF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KLB-Mr-YCV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="KLB-Mr-YCV" firstAttribute="trailing" secondItem="fjv-k4-F6c" secondAttribute="trailing" constant="20" id="3QO-eW-MnO"/>
                             <constraint firstItem="OpR-HT-As2" firstAttribute="leading" secondItem="KLB-Mr-YCV" secondAttribute="leading" constant="20" id="5Yi-7T-DTb"/>
+                            <constraint firstItem="fjv-k4-F6c" firstAttribute="top" secondItem="OpR-HT-As2" secondAttribute="bottom" constant="60" id="5s2-r8-Dzz"/>
                             <constraint firstItem="vly-Cu-8m1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KLB-Mr-YCV" secondAttribute="leading" symbolic="YES" id="6AK-Yp-ZcY"/>
-                            <constraint firstItem="M3J-nW-sYK" firstAttribute="centerX" secondItem="KLB-Mr-YCV" secondAttribute="centerX" id="9Ub-wF-sZf"/>
+                            <constraint firstItem="M3J-nW-sYK" firstAttribute="centerX" secondItem="KLB-Mr-YCV" secondAttribute="centerX" constant="-100" id="9Ub-wF-sZf"/>
                             <constraint firstItem="ruu-qO-QEA" firstAttribute="leading" secondItem="KLB-Mr-YCV" secondAttribute="leading" constant="16" id="Fbg-v1-0bh"/>
                             <constraint firstItem="ruu-qO-QEA" firstAttribute="top" secondItem="KLB-Mr-YCV" secondAttribute="top" constant="20" id="Hvs-5F-GY3"/>
                             <constraint firstItem="vly-Cu-8m1" firstAttribute="top" secondItem="ruu-qO-QEA" secondAttribute="bottom" constant="10" id="LdB-7f-Dsq"/>
@@ -90,6 +101,7 @@
                             <constraint firstItem="OpR-HT-As2" firstAttribute="top" secondItem="vTl-ku-qwd" secondAttribute="bottom" constant="20" id="ic5-rH-z5r"/>
                             <constraint firstItem="KLB-Mr-YCV" firstAttribute="trailing" secondItem="vly-Cu-8m1" secondAttribute="trailing" constant="20" id="l1I-T2-ili"/>
                             <constraint firstItem="KLB-Mr-YCV" firstAttribute="bottom" secondItem="M3J-nW-sYK" secondAttribute="bottom" constant="60" id="os6-nO-aLb"/>
+                            <constraint firstItem="fjv-k4-F6c" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="M3J-nW-sYK" secondAttribute="trailing" constant="8" symbolic="YES" id="tli-sx-rzB"/>
                             <constraint firstItem="vTl-ku-qwd" firstAttribute="leading" secondItem="KLB-Mr-YCV" secondAttribute="leading" constant="20" id="yT7-6k-uii"/>
                         </constraints>
                     </view>
@@ -108,6 +120,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

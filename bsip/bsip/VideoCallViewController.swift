@@ -74,14 +74,22 @@ class VideoCallViewController: UIViewController {
         }
         
         
+        @IBAction func startCalledVideoAction(_ sender: UIButton) {
+                startVideo(isCaller: false)
+        }
+        
         @IBAction func startVideoAction(_ sender: UIButton) {
+                startVideo(isCaller: true)
+        }
+        
+        private func startVideo(isCaller:Bool = true){
                 
                 view.layer.addSublayer(peerLayer)
                 view.layer.addSublayer(selfLayer)
                 
                 do{
                         var err:NSError?
-                        WebrtcLibStartVideo(self, &err)
+                        WebrtcLibStartVideo(isCaller,self, &err)
                         if let e = err{
                                 throw e
                         }

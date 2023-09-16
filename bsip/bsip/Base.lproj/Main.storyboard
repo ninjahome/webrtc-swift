@@ -24,7 +24,7 @@
                                     <constraint firstAttribute="height" constant="60" id="DQu-JV-RF3"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Start Echo"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Start Audio"/>
                                 <connections>
                                     <action selector="StartEcho:" destination="ymc-kc-MJR" eventType="touchUpInside" id="uFl-Vw-YaQ"/>
                                 </connections>
@@ -38,19 +38,50 @@
                                     <action selector="SwitchToSpeaker:" destination="ymc-kc-MJR" eventType="touchUpInside" id="Vwv-ty-R9s"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bKT-LN-dCr">
+                                <rect key="frame" x="20" y="146" width="353" height="240"/>
+                                <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="240" id="PLP-ce-suz"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8jP-G0-96F">
+                                <rect key="frame" x="20" y="594" width="353" height="60"/>
+                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="CKi-gh-WW0"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Answer Audio"/>
+                                <connections>
+                                    <action selector="AnswerAudio:" destination="ymc-kc-MJR" eventType="touchUpInside" id="98A-c8-CN1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="o6g-BC-Zs7"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="sX4-50-ykQ" firstAttribute="top" secondItem="8jP-G0-96F" secondAttribute="bottom" constant="8" symbolic="YES" id="FNp-eG-Ymk"/>
                             <constraint firstItem="ND9-CO-KAT" firstAttribute="top" secondItem="o6g-BC-Zs7" secondAttribute="top" id="OIy-Yy-56V"/>
+                            <constraint firstItem="bKT-LN-dCr" firstAttribute="top" secondItem="ND9-CO-KAT" secondAttribute="bottom" constant="8" symbolic="YES" id="Sa7-Dc-rxw"/>
                             <constraint firstItem="o6g-BC-Zs7" firstAttribute="trailing" secondItem="ND9-CO-KAT" secondAttribute="trailing" constant="14" id="WPn-0F-csL"/>
                             <constraint firstItem="o6g-BC-Zs7" firstAttribute="bottom" secondItem="sX4-50-ykQ" secondAttribute="bottom" constant="47" id="Wb7-X5-AA6"/>
                             <constraint firstItem="ND9-CO-KAT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="o6g-BC-Zs7" secondAttribute="leading" symbolic="YES" id="dMy-sd-zhS"/>
                             <constraint firstItem="sX4-50-ykQ" firstAttribute="leading" secondItem="o6g-BC-Zs7" secondAttribute="leading" constant="20" id="dZx-iv-ncL"/>
+                            <constraint firstItem="o6g-BC-Zs7" firstAttribute="trailing" secondItem="8jP-G0-96F" secondAttribute="trailing" constant="20" id="eQg-j1-vjJ"/>
+                            <constraint firstItem="o6g-BC-Zs7" firstAttribute="trailing" secondItem="bKT-LN-dCr" secondAttribute="trailing" constant="20" id="kat-Yc-oeU"/>
+                            <constraint firstItem="8jP-G0-96F" firstAttribute="leading" secondItem="o6g-BC-Zs7" secondAttribute="leading" constant="20" id="kdn-r7-BfK"/>
                             <constraint firstItem="o6g-BC-Zs7" firstAttribute="trailing" secondItem="sX4-50-ykQ" secondAttribute="trailing" constant="20" id="oTo-Id-NLk"/>
+                            <constraint firstItem="bKT-LN-dCr" firstAttribute="leading" secondItem="o6g-BC-Zs7" secondAttribute="leading" constant="20" id="wmE-QP-zRD"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="jBu-IX-tvV"/>
+                    <connections>
+                        <outlet property="descTxtView" destination="bKT-LN-dCr" id="zT1-nd-wvN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSV-ze-nmL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -192,6 +223,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="4eU-kG-MYU" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zj6-k2-XFO">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -231,11 +263,17 @@
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemMintColor">
             <color red="0.0" green="0.7803921568627451" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

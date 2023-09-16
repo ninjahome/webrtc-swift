@@ -179,6 +179,18 @@ extension VideoCallViewController: AVCaptureVideoDataOutputSampleBufferDelegate{
 }
 
 extension VideoCallViewController:WebrtcLibCallBackProtocol{
+        func connected() {
+                
+        }
+        
+        func disconnected() {
+                
+        }
+        
+        func newAudioData(_ data: Data?) {
+                print("------>>>why audio")
+        }
+        
         
         func answerCreated(_ p0: String?) {
                 guard let answer = p0 else{

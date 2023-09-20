@@ -54,7 +54,7 @@ class AudioViewController: UIViewController, WebrtcLibCallBackProtocol {
         var engine = AVAudioEngine()
         var player:AVAudioPlayerNode!
         var isSpeaker:Bool!
-        
+        var recocer:AVAudioConverter!
         override func viewDidLoad() {
                 super.viewDidLoad()
                 
@@ -97,7 +97,7 @@ class AudioViewController: UIViewController, WebrtcLibCallBackProtocol {
         }
         
         @IBAction func StartEcho(_ sender: UIButton) {
-#if false
+#if true
                 var err:NSError?
                 WebrtcLibStartVideo(true, self, &err)
                 if let e = err{
@@ -139,46 +139,24 @@ class AudioViewController: UIViewController, WebrtcLibCallBackProtocol {
                         
                         
                         engine.connect(player, to: engine.outputNode, format: inputFormat)
-                        guard let recover = AVAudioConverter(from: outputFormat, to: inputFormat) else{
+                        guard let c = AVAudioConverter(from: outputFormat, to: inputFormat) else{
+                                print("------>>> convert failed")
                                 return
                         }
-                        
-                        
+                        self.recocer = c
                         
                         input.installTap(onBus: bus, bufferSize: 4096, format: outputFormat) { (buffer, time) -> Void in
                                 self.conversionQueue.async {
+#if false
+                                        self.localTestFunc(inputFormat: inputFormat, outputFormat: outputFormat, buffer: buffer, time: time)
+#else
                                         let data = Data(pcmBuffer:buffer, time: time)
-                                       
-                                        
-                                        let pcmuData = WebrtcLibAudioEncodePcmu(data)
-                                        
-                                        guard let lpcmData = WebrtcLibAudioDecodePcmu(pcmuData) else{
-                                                print("------->>> WebrtcLibAudioDecodePcmu err")
-                                                return
+                                        var err:NSError?
+                                        WebrtcLibSendAudioToPeer(data, &err)
+                                        if let e = err{
+                                                print("------>>> write audio data err:", e.localizedDescription)
                                         }
-                                        
-                                        guard let bufFromData = lpcmData.makePCMBuffer(format: outputFormat) else{
-                                                print("------->>> makePCMBuffer err")
-                                                return
-                                        }
-                                        
-                                        print("------>>> length: \(bufFromData.frameLength) format: \(bufFromData.format) data size \(data.count)" )
-                                        
-                                        let inputBlock: AVAudioConverterInputBlock = { inNumPackets, outStatus in
-                                                outStatus.pointee = AVAudioConverterInputStatus.haveData
-                                                return bufFromData
-                                        }
-                                        let targetFrameCapacity = AVAudioFrameCount(inputFormat.sampleRate) * bufFromData.frameLength / AVAudioFrameCount(bufFromData.format.sampleRate)
-                                        guard let convertedBuffer = AVAudioPCMBuffer(pcmFormat: inputFormat, frameCapacity: targetFrameCapacity) else{
-                                                print("------->>> convertedBuffer err")
-                                                return
-                                        }
-                                        var error: NSError?
-                                        recover.convert(to: convertedBuffer, error: &error, withInputFrom:inputBlock)
-                                        if let e = error{
-                                                print("------->>> convert err:", e.localizedDescription)
-                                        }
-                                        self.player.scheduleBuffer(convertedBuffer)
+#endif
                                 }
                         }
                         
@@ -187,6 +165,42 @@ class AudioViewController: UIViewController, WebrtcLibCallBackProtocol {
                 }catch let err{
                         print("------>>>", err.localizedDescription)
                 }
+        }
+        
+        
+        func localTestFunc(inputFormat:AVAudioFormat, outputFormat:AVAudioFormat,buffer:AVAudioPCMBuffer,time:AVAudioTime){
+                let data = Data(pcmBuffer:buffer, time: time)
+                
+                
+                let pcmuData = WebrtcLibAudioEncodePcmu(data)
+                
+                guard let lpcmData = WebrtcLibAudioDecodePcmu(pcmuData) else{
+                        print("------->>> WebrtcLibAudioDecodePcmu err")
+                        return
+                }
+                
+                guard let bufFromData = lpcmData.makePCMBuffer(format: outputFormat) else{
+                        print("------->>> makePCMBuffer err")
+                        return
+                }
+                
+                print("------>>> length: \(bufFromData.frameLength) format: \(bufFromData.format) data size \(data.count)" )
+                
+                let inputBlock: AVAudioConverterInputBlock = { inNumPackets, outStatus in
+                        outStatus.pointee = AVAudioConverterInputStatus.haveData
+                        return bufFromData
+                }
+                let targetFrameCapacity = AVAudioFrameCount(inputFormat.sampleRate) * bufFromData.frameLength / AVAudioFrameCount(bufFromData.format.sampleRate)
+                guard let convertedBuffer = AVAudioPCMBuffer(pcmFormat: inputFormat, frameCapacity: targetFrameCapacity) else{
+                        print("------->>> convertedBuffer err")
+                        return
+                }
+                var error: NSError?
+                self.recocer.convert(to: convertedBuffer, error: &error, withInputFrom:inputBlock)
+                if let e = error{
+                        print("------->>> convert err:", e.localizedDescription)
+                }
+                self.player.scheduleBuffer(convertedBuffer)
         }
 }
 

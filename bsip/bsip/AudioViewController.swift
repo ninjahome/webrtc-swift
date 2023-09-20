@@ -97,7 +97,7 @@ class AudioViewController: UIViewController, WebrtcLibCallBackProtocol {
         }
         
         @IBAction func StartEcho(_ sender: UIButton) {
-#if true
+#if false
                 var err:NSError?
                 WebrtcLibStartVideo(true, self, &err)
                 if let e = err{
@@ -147,7 +147,7 @@ class AudioViewController: UIViewController, WebrtcLibCallBackProtocol {
                         
                         input.installTap(onBus: bus, bufferSize: 4096, format: outputFormat) { (buffer, time) -> Void in
                                 self.conversionQueue.async {
-#if false
+#if true
                                         self.localTestFunc(inputFormat: inputFormat, outputFormat: outputFormat, buffer: buffer, time: time)
 #else
                                         let data = Data(pcmBuffer:buffer, time: time)
@@ -172,13 +172,17 @@ class AudioViewController: UIViewController, WebrtcLibCallBackProtocol {
                 let data = Data(pcmBuffer:buffer, time: time)
                 
                 
-                let pcmuData = WebrtcLibAudioEncodePcmu(data)
+                guard let pcmuData = WebrtcLibAudioEncodePcmu(data)else{
+                        print("------->>> WebrtcLibAudioEncodePcmu err")
+                        return
+                }
                 
                 guard let lpcmData = WebrtcLibAudioDecodePcmu(pcmuData) else{
                         print("------->>> WebrtcLibAudioDecodePcmu err")
                         return
                 }
                 
+                print("------>>>raw size \(data.count) encoded size:\(pcmuData.count), decode size \(lpcmData.count)")
                 guard let bufFromData = lpcmData.makePCMBuffer(format: outputFormat) else{
                         print("------->>> makePCMBuffer err")
                         return

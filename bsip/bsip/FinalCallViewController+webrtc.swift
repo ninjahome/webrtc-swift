@@ -53,14 +53,14 @@ extension FinalCallViewController:WebrtcLibCallBackProtocol{
                         self.endingCall()
                         return
                 }
-                print("------>>>offer crete success \n \(offer)")
+//                print("------>>>offer crete success \n \(offer)")
                 let answer = WebrtcLibSdpToRelay(host, offer)
                 if answer.isEmpty{
                         print("------>>> send offer to relay server failed")
                         self.endingCall()
                         return
                 }
-                print("------>>>get answer from relay  success \n \(answer)")
+//                print("------>>>get answer from relay  success \n \(answer)")
                 WebrtcLibSetAnswerForOffer(answer)
         }
 }

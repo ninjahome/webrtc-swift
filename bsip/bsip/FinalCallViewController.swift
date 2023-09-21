@@ -32,6 +32,22 @@ class FinalCallViewController: UIViewController {
                 }
         }
         
+        override func viewWillAppear(_ animated: Bool) {
+                super.viewWillAppear(animated)
+                
+                // MARK: 1 - Asks user for microphone permission
+                
+                if AVCaptureDevice.authorizationStatus(for: AVMediaType.audio) != .authorized {
+                        AVCaptureDevice.requestAccess(for: AVMediaType.audio,
+                                                      completionHandler: { (granted: Bool) in
+                                if !granted{
+                                        print("------>>>audio operation not granted ")
+                                }
+                        })
+                }
+        }
+        
+        
         @IBAction func startAudioCall(_ sender: UIButton) {
                 startAudio(isCaller: true)
         }
@@ -66,7 +82,7 @@ class FinalCallViewController: UIViewController {
 //MARK: - business logic
 extension FinalCallViewController{
         func endingCall(){
-                audioPlayer.reset()
-                audioEngine.reset()
+                audioPlayer.stop()
+                audioEngine.stop()
         }
 }

@@ -14,18 +14,20 @@ import WebrtcLib
 extension FinalCallViewController{
         
         func initAudioEngine() throws{
+                
                 try AVAudioSession.sharedInstance().setCategory(.playAndRecord,
-                                                                mode: .videoChat,
-                                                                options: [.allowBluetooth,.allowAirPlay,.mixWithOthers])
+                                                                mode: .voiceChat,
+                                                                options: [.allowBluetooth])
                 
                 try AVAudioSession.sharedInstance().overrideOutputAudioPort(.none)
                 try AVAudioSession.sharedInstance().setActive(true)
                 
                 isSpeaker = false
-                
-                let bus = 0
+               
                 let input = audioEngine.inputNode
                 try input.setVoiceProcessingEnabled(true)
+                
+                let bus = 0
                 let inputFormat = input.inputFormat(forBus: bus)
                 
                 guard  let of = AVAudioFormat(commonFormat: AVAudioCommonFormat.pcmFormatInt16,
@@ -43,6 +45,7 @@ extension FinalCallViewController{
                 
                 audioPlayer = AVAudioPlayerNode()
                 audioEngine.attach(audioPlayer)
+                
                 audioEngine.connect(audioPlayer,
                                     to: audioEngine.outputNode,
                                     format: inputFormat)
@@ -50,6 +53,7 @@ extension FinalCallViewController{
                                  bufferSize: 4096,
                                  format: outputFormat,
                                  block: self.audioProcess)
+                
                 audioEngine.prepare()
         }
         

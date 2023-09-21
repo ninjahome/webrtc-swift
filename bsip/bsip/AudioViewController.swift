@@ -9,6 +9,7 @@ import UIKit
 import AVFoundation
 import WebrtcLib
 
+
 class AudioViewController: UIViewController, WebrtcLibCallBackProtocol {
         
         
@@ -32,9 +33,31 @@ class AudioViewController: UIViewController, WebrtcLibCallBackProtocol {
                 guard let d = data else{
                         return
                 }
-                let buffer = toPCMBuffer(data: d as NSData)
-                self.player.scheduleBuffer(buffer)
+                
+                guard let bufFromData = d.makePCMBuffer(format: outputFormat) else{
+                        print("------->>> makePCMBuffer err")
+                        return
+                }
+                
+                print("------>>> length: \(bufFromData.frameLength) format: \(bufFromData.format) " )
+                
+                let inputBlock: AVAudioConverterInputBlock = { inNumPackets, outStatus in
+                        outStatus.pointee = AVAudioConverterInputStatus.haveData
+                        return bufFromData
+                }
+                let targetFrameCapacity = AVAudioFrameCount(inputFormat.sampleRate) * bufFromData.frameLength / AVAudioFrameCount(bufFromData.format.sampleRate)
+                guard let convertedBuffer = AVAudioPCMBuffer(pcmFormat: inputFormat, frameCapacity: targetFrameCapacity) else{
+                        print("------->>> convertedBuffer err")
+                        return
+                }
+                var error: NSError?
+                self.recocer.convert(to: convertedBuffer, error: &error, withInputFrom:inputBlock)
+                if let e = error{
+                        print("------->>> convert err:", e.localizedDescription)
+                }
+                self.player.scheduleBuffer(convertedBuffer)
         }
+        
         func newVideoData(_ typ: Int, h264data: Data?) {
                 print("------>>>why video")
         }
@@ -55,6 +78,9 @@ class AudioViewController: UIViewController, WebrtcLibCallBackProtocol {
         var player:AVAudioPlayerNode!
         var isSpeaker:Bool!
         var recocer:AVAudioConverter!
+        var outputFormat:AVAudioFormat!
+        var inputFormat:AVAudioFormat!
+        
         override func viewDidLoad() {
                 super.viewDidLoad()
                 
@@ -97,16 +123,16 @@ class AudioViewController: UIViewController, WebrtcLibCallBackProtocol {
         }
         
         @IBAction func StartEcho(_ sender: UIButton) {
+                
 #if false
+                try! engine.start()
+                player.play()
+#else
                 var err:NSError?
                 WebrtcLibStartVideo(true, self, &err)
                 if let e = err{
                         print("------>>>start failed:",e.localizedDescription)
                 }
-#else
-                
-                try! engine.start()
-                player.play()
 #endif
         }
         
@@ -125,18 +151,18 @@ class AudioViewController: UIViewController, WebrtcLibCallBackProtocol {
                         
                         let bus = 0
                         
-                        let inputFormat = input.inputFormat(forBus: bus)
+                        inputFormat = input.inputFormat(forBus: bus)
                         
-                        print("------>>>input format \(inputFormat) \(inputFormat.formatDescription)")
+                        print("------>>>input format \(inputFormat! ) \(inputFormat.formatDescription)")
                         
-                        guard  let outputFormat = AVAudioFormat(commonFormat: AVAudioCommonFormat.pcmFormatInt16,
+                        guard  let of = AVAudioFormat(commonFormat: AVAudioCommonFormat.pcmFormatInt16,
                                                                 sampleRate: 44100,
                                                                 channels: 1,
                                                                 interleaved: true) else{
                                 return
                         }
-                        print("------>>>input format \(outputFormat) \(outputFormat.formatDescription)")
-                        
+                        print("------>>>input format \(of) \(of.formatDescription)")
+                        outputFormat = of
                         
                         engine.connect(player, to: engine.outputNode, format: inputFormat)
                         guard let c = AVAudioConverter(from: outputFormat, to: inputFormat) else{
@@ -147,8 +173,8 @@ class AudioViewController: UIViewController, WebrtcLibCallBackProtocol {
                         
                         input.installTap(onBus: bus, bufferSize: 4096, format: outputFormat) { (buffer, time) -> Void in
                                 self.conversionQueue.async {
-#if true
-                                        self.localTestFunc(inputFormat: inputFormat, outputFormat: outputFormat, buffer: buffer, time: time)
+#if false
+                                        self.localTestFunc(buffer: buffer, time: time)
 #else
                                         let data = Data(pcmBuffer:buffer, time: time)
                                         var err:NSError?
@@ -168,7 +194,7 @@ class AudioViewController: UIViewController, WebrtcLibCallBackProtocol {
         }
         
         
-        func localTestFunc(inputFormat:AVAudioFormat, outputFormat:AVAudioFormat,buffer:AVAudioPCMBuffer,time:AVAudioTime){
+        func localTestFunc(buffer:AVAudioPCMBuffer,time:AVAudioTime){
                 let data = Data(pcmBuffer:buffer, time: time)
                 
                 

@@ -9,15 +9,107 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Audio Test View Controller-->
+        <!--Final Call View Controller-->
         <scene sceneID="i4v-8f-e92">
             <objects>
-                <viewController id="NK9-TE-rMb" customClass="AudioTestViewController" customModule="bsip" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="NK9-TE-rMb" customClass="FinalCallViewController" customModule="bsip" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MMI-Kv-w7O">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5pA-zg-7OU">
+                                <rect key="frame" x="20" y="143" width="353" height="48"/>
+                                <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="9UT-nM-Xea"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="StartAudioCall">
+                                    <color key="baseForegroundColor" systemColor="systemGray6Color"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="startAudioCall:" destination="NK9-TE-rMb" eventType="touchUpInside" id="0gJ-A9-F1g"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hki-I9-S5V">
+                                <rect key="frame" x="20" y="223" width="353" height="48"/>
+                                <color key="backgroundColor" systemColor="darkTextColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="K9o-Bn-f0b"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="48" id="ZwG-j0-xyX"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="AnswerAudioCall">
+                                    <color key="baseForegroundColor" systemColor="systemPinkColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="answerAudioCall:" destination="NK9-TE-rMb" eventType="touchUpInside" id="qfL-iu-iWV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q6F-tj-5fl">
+                                <rect key="frame" x="20" y="681" width="353" height="48"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="C5g-JC-ao5"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="48" id="WGB-vA-hkU"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="AnswerVideoCall">
+                                    <color key="baseForegroundColor" systemColor="systemGroupedBackgroundColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="answerVideoCall:" destination="NK9-TE-rMb" eventType="touchUpInside" id="5eW-w0-yAD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A4i-Cj-2hR">
+                                <rect key="frame" x="222" y="291" width="151" height="48"/>
+                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="ZeZ-6f-1zz"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Switch Speacker">
+                                    <color key="baseForegroundColor" systemColor="groupTableViewBackgroundColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="switchSpeaker:" destination="NK9-TE-rMb" eventType="touchUpInside" id="Bax-3v-Myx"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mfw-qD-hfi">
+                                <rect key="frame" x="20" y="601" width="353" height="48"/>
+                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="QyZ-Rk-tRU"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="48" id="sMV-Aj-ces"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="StartVideoCall">
+                                    <color key="baseForegroundColor" systemColor="systemGray6Color"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="startVideoCall:" destination="NK9-TE-rMb" eventType="touchUpInside" id="WQ6-Rv-xsO"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="70G-Pz-huG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Q6F-tj-5fl" firstAttribute="leading" secondItem="70G-Pz-huG" secondAttribute="leading" constant="20" id="CyY-Kh-AP3"/>
+                            <constraint firstItem="hki-I9-S5V" firstAttribute="top" secondItem="5pA-zg-7OU" secondAttribute="bottom" constant="32" id="DMQ-sp-HH6"/>
+                            <constraint firstItem="Q6F-tj-5fl" firstAttribute="top" secondItem="mfw-qD-hfi" secondAttribute="bottom" constant="32" id="DZU-WZ-QgD"/>
+                            <constraint firstItem="70G-Pz-huG" firstAttribute="trailing" secondItem="Q6F-tj-5fl" secondAttribute="trailing" constant="20" id="EVF-t3-dkR"/>
+                            <constraint firstItem="5pA-zg-7OU" firstAttribute="top" secondItem="70G-Pz-huG" secondAttribute="top" constant="40" id="FNj-jI-fwI"/>
+                            <constraint firstItem="70G-Pz-huG" firstAttribute="trailing" secondItem="hki-I9-S5V" secondAttribute="trailing" constant="20" id="FZZ-U7-1DL"/>
+                            <constraint firstItem="5pA-zg-7OU" firstAttribute="leading" secondItem="70G-Pz-huG" secondAttribute="leading" constant="20" id="NBd-2s-Bt1"/>
+                            <constraint firstItem="70G-Pz-huG" firstAttribute="bottom" secondItem="Q6F-tj-5fl" secondAttribute="bottom" constant="40" id="Pzd-Zq-9u9"/>
+                            <constraint firstItem="A4i-Cj-2hR" firstAttribute="top" secondItem="hki-I9-S5V" secondAttribute="bottom" constant="20" id="Sd4-2l-Zcj"/>
+                            <constraint firstItem="70G-Pz-huG" firstAttribute="trailing" secondItem="mfw-qD-hfi" secondAttribute="trailing" constant="20" id="aDQ-ql-uZ6"/>
+                            <constraint firstItem="hki-I9-S5V" firstAttribute="leading" secondItem="70G-Pz-huG" secondAttribute="leading" constant="20" id="bbf-IK-RbT"/>
+                            <constraint firstItem="70G-Pz-huG" firstAttribute="trailing" secondItem="5pA-zg-7OU" secondAttribute="trailing" constant="20" id="gha-Mc-g2E"/>
+                            <constraint firstItem="mfw-qD-hfi" firstAttribute="leading" secondItem="70G-Pz-huG" secondAttribute="leading" constant="20" id="kia-MI-OG6"/>
+                            <constraint firstItem="A4i-Cj-2hR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="70G-Pz-huG" secondAttribute="leading" symbolic="YES" id="mkj-6V-PFW"/>
+                            <constraint firstItem="70G-Pz-huG" firstAttribute="trailing" secondItem="A4i-Cj-2hR" secondAttribute="trailing" constant="20" id="tFR-O6-9sd"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="z0p-oX-UPX"/>
                 </viewController>
@@ -324,6 +416,12 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
@@ -333,8 +431,17 @@
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemMintColor">
             <color red="0.0" green="0.7803921568627451" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -344,6 +451,9 @@
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

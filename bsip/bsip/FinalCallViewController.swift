@@ -7,40 +7,66 @@
 
 import UIKit
 import AVFAudio
+import AVFoundation
+import WebrtcLib
 
 class FinalCallViewController: UIViewController {
+        let audioProcessQueue = DispatchQueue(label: "audio process queue")
+        var audioEngine = AVAudioEngine()
+        var audioPlayer:AVAudioPlayerNode!
+        var isSpeaker:Bool!
+        var audioRecover:AudioRecover!
+        var hasVideoChannel:Bool = false
+        var host:String = "http://192.168.1.122:50000/sdp"
         
-        var player: AVAudioPlayer!
-        
+        // MARK: - ui logic
         override func viewDidLoad() {
                 super.viewDidLoad()
+                self.hideKeyboardWhenTappedAround()
                 
-                guard let fxURL = Bundle.main.url(forResource: "output", withExtension: "ogg") else {
-                        return
+                do{
+                        try initAudioEngine()
+                        
+                }catch let err{
+                        print("------>>> init system err:", err.localizedDescription)
                 }
-                
-                do {
-                        let data = try Data(contentsOf: fxURL)
-                        print("------>>>data length :", data.count)
-                        let file: AVAudioFile!
-                        try file = AVAudioFile(forReading: fxURL)
-                        let format = file.processingFormat
-                        print("------>>>format \(format.formatDescription)")
-                } catch {
-                        print("------->>>Could not load file: \(error)")
+        }
+        
+        @IBAction func startAudioCall(_ sender: UIButton) {
+                startAudio(isCaller: true)
+        }
+        
+        @IBAction func answerAudioCall(_ sender: UIButton) {
+                startAudio(isCaller: false)
+        }
+        
+        private func startAudio(isCaller:Bool){
+                self.hasVideoChannel = false
+                var err:NSError?
+                WebrtcLibStartCall(self.hasVideoChannel, isCaller, "alice-to-bob", self, &err)
+                if let e = err{
+                        print("------>>> start audio call failed \(e.localizedDescription)")
                         return
                 }
         }
         
+        @IBAction func startVideoCall(_ sender: UIButton) {
+                self.hasVideoChannel = true
+        }
         
-        /*
-         // MARK: - Navigation
-         
-         // In a storyboard-based application, you will often want to do a little preparation before navigation
-         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         // Get the new view controller using segue.destination.
-         // Pass the selected object to the new view controller.
-         }
-         */
+        @IBAction func answerVideoCall(_ sender: UIButton) {
+        }
         
+        @IBAction func switchSpeaker(_ sender: UIButton) {
+                self.switchSpeaker()
+        }
+        
+}
+
+//MARK: - business logic
+extension FinalCallViewController{
+        func endingCall(){
+                audioPlayer.reset()
+                audioEngine.reset()
+        }
 }

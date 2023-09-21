@@ -21,6 +21,10 @@
 		69BC76AF2AB6A9BE0084B19C /* output.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 69BC76AE2AB6A9AA0084B19C /* output.ogg */; };
 		69EA25BA2A907B3B007DA7F8 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 69EA25B92A907B26007DA7F8 /* libresolv.tbd */; };
 		69EA25BC2A907C5A007DA7F8 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA25BB2A907C5A007DA7F8 /* Util.swift */; };
+		69F2BB4A2ABC341600998492 /* AudioRecover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F2BB492ABC341600998492 /* AudioRecover.swift */; };
+		69F2BB4C2ABC424A00998492 /* FinalCallViewController+webrtc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F2BB4B2ABC424A00998492 /* FinalCallViewController+webrtc.swift */; };
+		69F2BB4E2ABC428800998492 /* FinalCallViewController+audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F2BB4D2ABC428800998492 /* FinalCallViewController+audio.swift */; };
+		69F2BB502ABC42BB00998492 /* FinalCallViewController+video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F2BB4F2ABC42BB00998492 /* FinalCallViewController+video.swift */; };
 		69FA7D342A8E415500B9DF52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FA7D332A8E415500B9DF52 /* AppDelegate.swift */; };
 		69FA7D362A8E415500B9DF52 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FA7D352A8E415500B9DF52 /* SceneDelegate.swift */; };
 		69FA7D3B2A8E415500B9DF52 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69FA7D392A8E415500B9DF52 /* Main.storyboard */; };
@@ -45,6 +49,10 @@
 		69BC76AE2AB6A9AA0084B19C /* output.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = output.ogg; sourceTree = "<group>"; };
 		69EA25B92A907B26007DA7F8 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		69EA25BB2A907C5A007DA7F8 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		69F2BB492ABC341600998492 /* AudioRecover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecover.swift; sourceTree = "<group>"; };
+		69F2BB4B2ABC424A00998492 /* FinalCallViewController+webrtc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FinalCallViewController+webrtc.swift"; sourceTree = "<group>"; };
+		69F2BB4D2ABC428800998492 /* FinalCallViewController+audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FinalCallViewController+audio.swift"; sourceTree = "<group>"; };
+		69F2BB4F2ABC42BB00998492 /* FinalCallViewController+video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FinalCallViewController+video.swift"; sourceTree = "<group>"; };
 		69FA7D302A8E415500B9DF52 /* bsip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bsip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69FA7D332A8E415500B9DF52 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		69FA7D352A8E415500B9DF52 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +80,7 @@
 		69EA25B82A905C86007DA7F8 /* media */ = {
 			isa = PBXGroup;
 			children = (
+				69F2BB492ABC341600998492 /* AudioRecover.swift */,
 				697ECB922A8F756300E2E07A /* CMSampleBuffer+extension.swift */,
 				69535F672A963159004BAA51 /* VideoFileReader.swift */,
 				697ECB942A8F756300E2E07A /* H264Encoder.swift */,
@@ -111,6 +120,9 @@
 				69FA7D352A8E415500B9DF52 /* SceneDelegate.swift */,
 				697ECB8C2A8F74C800E2E07A /* VideoCallViewController.swift */,
 				69BC76AC2AB6A2540084B19C /* FinalCallViewController.swift */,
+				69F2BB4D2ABC428800998492 /* FinalCallViewController+audio.swift */,
+				69F2BB4F2ABC42BB00998492 /* FinalCallViewController+video.swift */,
+				69F2BB4B2ABC424A00998492 /* FinalCallViewController+webrtc.swift */,
 				697CBAEF2AB3482E00F9D8E7 /* AudioViewController.swift */,
 				69FA7D392A8E415500B9DF52 /* Main.storyboard */,
 				69FA7D3F2A8E415600B9DF52 /* Assets.xcassets */,
@@ -204,8 +216,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69F2BB4E2ABC428800998492 /* FinalCallViewController+audio.swift in Sources */,
 				69EA25BC2A907C5A007DA7F8 /* Util.swift in Sources */,
 				69BC76AD2AB6A2540084B19C /* FinalCallViewController.swift in Sources */,
+				69F2BB4C2ABC424A00998492 /* FinalCallViewController+webrtc.swift in Sources */,
 				697ECB9D2A8F756300E2E07A /* NALUParser.swift in Sources */,
 				697ECB9A2A8F756300E2E07A /* H264Encoder.swift in Sources */,
 				69FA7D342A8E415500B9DF52 /* AppDelegate.swift in Sources */,
@@ -215,8 +229,10 @@
 				697ECB982A8F756300E2E07A /* CMSampleBuffer+extension.swift in Sources */,
 				697ECB992A8F756300E2E07A /* H264Unit.swift in Sources */,
 				697ECB8D2A8F74C800E2E07A /* VideoCallViewController.swift in Sources */,
+				69F2BB502ABC42BB00998492 /* FinalCallViewController+video.swift in Sources */,
 				69FA7D3E2A8E415500B9DF52 /* bsip.xcdatamodeld in Sources */,
 				69535F682A963159004BAA51 /* VideoFileReader.swift in Sources */,
+				69F2BB4A2ABC341600998492 /* AudioRecover.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

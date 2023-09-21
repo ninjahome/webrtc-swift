@@ -146,7 +146,7 @@ class AudioViewController: UIViewController, WebrtcLibCallBackProtocol {
                 
 #if false
                 try! engine.start()
-                player.play()
+                audioPlayer.play()
 #else
                 var err:NSError?
                 WebrtcLibStartVideo(true, self, &err)

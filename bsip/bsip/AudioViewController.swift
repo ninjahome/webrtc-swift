@@ -115,6 +115,26 @@ class AudioViewController: UIViewController, WebrtcLibCallBackProtocol {
                 }
         }
         
+        @IBAction func startCalledAudioAction(_ sender: UIButton) {
+                startAudio(isCaller: false)
+        }
+        
+        @IBAction func startCallingAudioAction(_ sender: UIButton) {
+                startAudio(isCaller: true)
+        }
+        
+        private func startAudio(isCaller:Bool = true){
+                do{
+                        var err:NSError?
+                        WebrtcLibStartVideo(isCaller,self, &err)
+                        if let e = err{
+                                throw e
+                        }
+                }catch let e{
+                        print("------>>>startVideoAction:",e.localizedDescription)
+                }
+        }
+        
         @IBAction func AnswerAudio(_ sender: UIButton) {
                 guard let sdp = descTxtView.text else{
                         return

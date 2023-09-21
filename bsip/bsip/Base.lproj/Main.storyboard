@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4eU-kG-MYU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4eU-kG-MYU">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -76,11 +76,40 @@
                                     <action selector="AnswerAudio:" destination="ymc-kc-MJR" eventType="touchUpInside" id="98A-c8-CN1"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l1d-NC-tZW">
+                                <rect key="frame" x="20" y="394" width="120" height="44"/>
+                                <color key="backgroundColor" red="0.85098039219999999" green="0.31764705879999999" blue="0.24313725489999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="hFw-QN-wNY"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="900" constant="120" id="yoc-Hy-M4E"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="StartCall"/>
+                                <connections>
+                                    <action selector="startCallingAudioAction:" destination="ymc-kc-MJR" eventType="touchUpInside" id="93M-3Q-3bO"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aq6-Qj-PRV">
+                                <rect key="frame" x="253" y="394" width="120" height="44"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="KCm-nM-URi"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="900" constant="120" id="Xet-id-gXw"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Called"/>
+                                <connections>
+                                    <action selector="startCalledAudioAction:" destination="ymc-kc-MJR" eventType="touchUpInside" id="OYV-YB-oEF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="o6g-BC-Zs7"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="l1d-NC-tZW" firstAttribute="top" secondItem="bKT-LN-dCr" secondAttribute="bottom" constant="8" symbolic="YES" id="B3e-it-Jns"/>
                             <constraint firstItem="sX4-50-ykQ" firstAttribute="top" secondItem="8jP-G0-96F" secondAttribute="bottom" constant="8" symbolic="YES" id="FNp-eG-Ymk"/>
+                            <constraint firstItem="l1d-NC-tZW" firstAttribute="leading" secondItem="o6g-BC-Zs7" secondAttribute="leading" constant="20" id="Jzt-Oc-5Bu"/>
+                            <constraint firstItem="Aq6-Qj-PRV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="l1d-NC-tZW" secondAttribute="trailing" constant="8" symbolic="YES" id="K0S-DS-KTY"/>
                             <constraint firstItem="ND9-CO-KAT" firstAttribute="top" secondItem="o6g-BC-Zs7" secondAttribute="top" id="OIy-Yy-56V"/>
                             <constraint firstItem="bKT-LN-dCr" firstAttribute="top" secondItem="ND9-CO-KAT" secondAttribute="bottom" constant="8" symbolic="YES" id="Sa7-Dc-rxw"/>
                             <constraint firstItem="o6g-BC-Zs7" firstAttribute="trailing" secondItem="ND9-CO-KAT" secondAttribute="trailing" constant="14" id="WPn-0F-csL"/>
@@ -88,9 +117,11 @@
                             <constraint firstItem="ND9-CO-KAT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="o6g-BC-Zs7" secondAttribute="leading" symbolic="YES" id="dMy-sd-zhS"/>
                             <constraint firstItem="sX4-50-ykQ" firstAttribute="leading" secondItem="o6g-BC-Zs7" secondAttribute="leading" constant="20" id="dZx-iv-ncL"/>
                             <constraint firstItem="o6g-BC-Zs7" firstAttribute="trailing" secondItem="8jP-G0-96F" secondAttribute="trailing" constant="20" id="eQg-j1-vjJ"/>
+                            <constraint firstItem="Aq6-Qj-PRV" firstAttribute="top" secondItem="bKT-LN-dCr" secondAttribute="bottom" constant="8" symbolic="YES" id="hve-Qp-4mO"/>
                             <constraint firstItem="o6g-BC-Zs7" firstAttribute="trailing" secondItem="bKT-LN-dCr" secondAttribute="trailing" constant="20" id="kat-Yc-oeU"/>
                             <constraint firstItem="8jP-G0-96F" firstAttribute="leading" secondItem="o6g-BC-Zs7" secondAttribute="leading" constant="20" id="kdn-r7-BfK"/>
                             <constraint firstItem="o6g-BC-Zs7" firstAttribute="trailing" secondItem="sX4-50-ykQ" secondAttribute="trailing" constant="20" id="oTo-Id-NLk"/>
+                            <constraint firstItem="o6g-BC-Zs7" firstAttribute="trailing" secondItem="Aq6-Qj-PRV" secondAttribute="trailing" constant="20" id="wLR-WM-7Hz"/>
                             <constraint firstItem="bKT-LN-dCr" firstAttribute="leading" secondItem="o6g-BC-Zs7" secondAttribute="leading" constant="20" id="wmE-QP-zRD"/>
                         </constraints>
                     </view>
@@ -294,7 +325,7 @@
     </scenes>
     <resources>
         <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

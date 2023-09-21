@@ -1,8 +1,0 @@
-framework module "WebrtcLib" {
-	header "ref.h"
-    header "WebrtcLib.objc.h"
-    header "Universe.objc.h"
-    header "WebrtcLib.h"
-
-    export *
-}

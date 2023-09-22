@@ -11,6 +11,7 @@ import AVFoundation
 import WebrtcLib
 
 class FinalCallViewController: UIViewController {
+        //MARK - audio variables
         let audioProcessQueue = DispatchQueue(label: "audio process queue")
         var audioEngine = AVAudioEngine()
         var audioPlayer:AVAudioPlayerNode!
@@ -21,6 +22,13 @@ class FinalCallViewController: UIViewController {
         var muteLocal:Bool = false
         var muteRemote:Bool = false
         
+        //MARK - video variable
+        var selfLayer = AVSampleBufferDisplayLayer()
+        var peerLayer = AVSampleBufferDisplayLayer()
+        lazy var captureManager = VideoCaptureManager()
+        lazy var videoEncoder = H264Encoder()
+        let naluParser = NALUParser()
+        
         // MARK: - ui logic
         override func viewDidLoad() {
                 super.viewDidLoad()
@@ -28,6 +36,7 @@ class FinalCallViewController: UIViewController {
                 
                 do{
                         try initAudioEngine()
+                        initVidoeEngine()
                         
                 }catch let err{
                         print("------>>> init system err:", err.localizedDescription)
@@ -51,14 +60,16 @@ class FinalCallViewController: UIViewController {
         
         
         @IBAction func startAudioCall(_ sender: UIButton) {
-                startAudio(isCaller: true)
+                self.hasVideoChannel = false
+                startAudioCall(isCaller: true)
         }
         
         @IBAction func answerAudioCall(_ sender: UIButton) {
-                startAudio(isCaller: false)
+                self.hasVideoChannel = false
+                startAudioCall(isCaller: false)
         }
         
-        private func startAudio(isCaller:Bool){
+        private func startAudioCall(isCaller:Bool){
                 self.hasVideoChannel = false
                 var err:NSError?
                 WebrtcLibStartCall(self.hasVideoChannel, isCaller, "alice-to-bob", self, &err)
@@ -69,10 +80,26 @@ class FinalCallViewController: UIViewController {
         }
         
         @IBAction func startVideoCall(_ sender: UIButton) {
-                self.hasVideoChannel = true
+                self.startVideoCall(isCaller: true)
         }
         
         @IBAction func answerVideoCall(_ sender: UIButton) {
+                self.startVideoCall(isCaller: false)
+                
+        }
+        
+        private func startVideoCall(isCaller:Bool){
+                self.hasVideoChannel = true
+                view.layer.addSublayer(peerLayer)
+                view.layer.addSublayer(selfLayer)
+                var err:NSError?
+                WebrtcLibStartCall(self.hasVideoChannel, isCaller, "alice-to-bob", self, &err)
+                if let e = err{
+                        print("------>>> start audio call failed \(e.localizedDescription)")
+                        return
+                }
+                try! videoEncoder.configureCompressSession()
+                captureManager.startSession()
         }
         
         @IBAction func switchSpeaker(_ sender: UIButton) {
@@ -93,5 +120,10 @@ extension FinalCallViewController{
         func endingCall(){
                 audioPlayer.stop()
                 audioEngine.stop()
+                
+                self.peerLayer.removeFromSuperlayer()
+                self.selfLayer.removeFromSuperlayer()
+                
+                captureManager.stop()
         }
 }

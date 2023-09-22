@@ -45,6 +45,10 @@ class VideoCaptureManager {
                 }
         }
         
+        func stop(){
+                session.stopRunning()
+        }
+        
         private func requestCameraAuthorizationIfNeeded() {
                 switch AVCaptureDevice.authorizationStatus(for: .video) {
                 case .authorized:

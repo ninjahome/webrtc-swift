@@ -48,7 +48,12 @@ extension FinalCallViewController:WebrtcLibCallBackProtocol{
         }
         
         func newVideoData(_ typ: Int, h264data: Data?) {
-                
+                guard let data = h264data else{
+                        return
+                }
+                naluParser.parsingQueue.async {
+                        self.naluParser.enqueue(typ, data)
+                }
         }
         
         func offerCreated(_ p0: String?) {

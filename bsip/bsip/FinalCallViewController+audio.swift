@@ -49,6 +49,7 @@ extension FinalCallViewController{
                 audioEngine.connect(audioPlayer,
                                     to: audioEngine.outputNode,
                                     format: inputFormat)
+                
                 input.installTap(onBus: bus,
                                  bufferSize: 4096,
                                  format: outputFormat,
@@ -58,6 +59,10 @@ extension FinalCallViewController{
         }
         
         func audioProcess(buffer:AVAudioPCMBuffer, time:AVAudioTime) {
+                if self.muteLocal{
+                        return
+                }
+                
                 self.audioProcessQueue.async {
                         let data = Data(pcmBuffer:buffer, time: time)
                         var err:NSError?

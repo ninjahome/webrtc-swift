@@ -75,6 +75,20 @@
                                     <action selector="switchSpeaker:" destination="NK9-TE-rMb" eventType="touchUpInside" id="Bax-3v-Myx"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RzI-6O-jah">
+                                <rect key="frame" x="20.000000000000007" y="291" width="107.66666666666669" height="48"/>
+                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="gg9-ir-D16"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Mute Local">
+                                    <color key="baseForegroundColor" systemColor="groupTableViewBackgroundColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="muteLocal:" destination="NK9-TE-rMb" eventType="touchUpInside" id="Tf6-Y4-VxT"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mfw-qD-hfi">
                                 <rect key="frame" x="20" y="601" width="353" height="48"/>
                                 <color key="backgroundColor" systemColor="systemOrangeColor"/>
@@ -90,10 +104,27 @@
                                     <action selector="startVideoCall:" destination="NK9-TE-rMb" eventType="touchUpInside" id="WQ6-Rv-xsO"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQa-da-6zg">
+                                <rect key="frame" x="20" y="359" width="122" height="48"/>
+                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="Wbb-eC-GiU"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Mute remote">
+                                    <color key="baseForegroundColor" systemColor="groupTableViewBackgroundColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="mutePeer:" destination="NK9-TE-rMb" eventType="touchUpInside" id="1Ri-m7-dDK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="70G-Pz-huG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="fQa-da-6zg" firstAttribute="top" secondItem="RzI-6O-jah" secondAttribute="bottom" constant="20" id="19L-S9-J8w"/>
+                            <constraint firstItem="RzI-6O-jah" firstAttribute="top" secondItem="hki-I9-S5V" secondAttribute="bottom" constant="20" id="2DI-9W-6JG"/>
+                            <constraint firstItem="RzI-6O-jah" firstAttribute="leading" secondItem="70G-Pz-huG" secondAttribute="leading" constant="20" id="ChQ-3x-3Yx"/>
                             <constraint firstItem="Q6F-tj-5fl" firstAttribute="leading" secondItem="70G-Pz-huG" secondAttribute="leading" constant="20" id="CyY-Kh-AP3"/>
                             <constraint firstItem="hki-I9-S5V" firstAttribute="top" secondItem="5pA-zg-7OU" secondAttribute="bottom" constant="32" id="DMQ-sp-HH6"/>
                             <constraint firstItem="Q6F-tj-5fl" firstAttribute="top" secondItem="mfw-qD-hfi" secondAttribute="bottom" constant="32" id="DZU-WZ-QgD"/>
@@ -106,9 +137,12 @@
                             <constraint firstItem="70G-Pz-huG" firstAttribute="trailing" secondItem="mfw-qD-hfi" secondAttribute="trailing" constant="20" id="aDQ-ql-uZ6"/>
                             <constraint firstItem="hki-I9-S5V" firstAttribute="leading" secondItem="70G-Pz-huG" secondAttribute="leading" constant="20" id="bbf-IK-RbT"/>
                             <constraint firstItem="70G-Pz-huG" firstAttribute="trailing" secondItem="5pA-zg-7OU" secondAttribute="trailing" constant="20" id="gha-Mc-g2E"/>
+                            <constraint firstItem="A4i-Cj-2hR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RzI-6O-jah" secondAttribute="trailing" constant="8" symbolic="YES" id="ho0-0f-g3i"/>
                             <constraint firstItem="mfw-qD-hfi" firstAttribute="leading" secondItem="70G-Pz-huG" secondAttribute="leading" constant="20" id="kia-MI-OG6"/>
+                            <constraint firstItem="fQa-da-6zg" firstAttribute="leading" secondItem="70G-Pz-huG" secondAttribute="leading" constant="20" id="luQ-Ly-GoC"/>
                             <constraint firstItem="A4i-Cj-2hR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="70G-Pz-huG" secondAttribute="leading" symbolic="YES" id="mkj-6V-PFW"/>
                             <constraint firstItem="70G-Pz-huG" firstAttribute="trailing" secondItem="A4i-Cj-2hR" secondAttribute="trailing" constant="20" id="tFR-O6-9sd"/>
+                            <constraint firstItem="70G-Pz-huG" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fQa-da-6zg" secondAttribute="trailing" symbolic="YES" id="zWf-4s-WDJ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="z0p-oX-UPX"/>

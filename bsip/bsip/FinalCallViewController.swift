@@ -18,6 +18,8 @@ class FinalCallViewController: UIViewController {
         var audioRecover:AudioRecover!
         var hasVideoChannel:Bool = false
         var host:String = "http://192.168.1.122:50000/sdp"
+        var muteLocal:Bool = false
+        var muteRemote:Bool = false
         
         // MARK: - ui logic
         override func viewDidLoad() {
@@ -77,6 +79,13 @@ class FinalCallViewController: UIViewController {
                 self.switchSpeaker()
         }
         
+        @IBAction func muteLocal(_ sender: UIButton) {
+                muteLocal = !muteLocal
+        }
+        
+        @IBAction func mutePeer(_ sender: UIButton) {
+                muteRemote = !muteRemote
+        }
 }
 
 //MARK: - business logic

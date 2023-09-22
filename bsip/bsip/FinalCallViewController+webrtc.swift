@@ -29,6 +29,10 @@ extension FinalCallViewController:WebrtcLibCallBackProtocol{
         }
         
         func newAudioData(_ data: Data?) {
+                if self.muteRemote{
+                        return
+                }
+                
                 self.audioProcessQueue.async{
                         guard let d = data else{
                                 print("------>>> receive empty audio data")

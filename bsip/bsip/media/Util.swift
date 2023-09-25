@@ -11,7 +11,7 @@ import AVFAudio
 
 let NotifySceneBecomeActive = NSNotification.Name(rawValue:"scene_become_active")
 let NotifySceneDidEnterBackground = NSNotification.Name(rawValue:"scene_did_enter_background")
-
+public let RelayHostUrl:String = "http://192.168.1.122:50000/sdp"
 extension UIViewController {
         
         @objc func dismissKeyboard() {
@@ -181,4 +181,4 @@ public class OpusDecoder {
                 return pcm
         }
 }
-
+ 

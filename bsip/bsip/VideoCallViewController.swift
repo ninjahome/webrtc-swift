@@ -194,7 +194,7 @@ extension VideoCallViewController:WebrtcLibCallBackProtocol{
         
         func answerCreated(_ p0: String?) {
                 guard let answer = p0 else{
-                        WebrtcLibEndCall()
+                        print("------>>> empty answer")
                         return
                 }
                 print(answer)
@@ -202,7 +202,7 @@ extension VideoCallViewController:WebrtcLibCallBackProtocol{
         
         func offerCreated(_ p0: String?) {
                 guard let offer = p0 else{
-                        WebrtcLibEndCall()
+                        print("------>>> empty offer")
                         return
                 }
                 

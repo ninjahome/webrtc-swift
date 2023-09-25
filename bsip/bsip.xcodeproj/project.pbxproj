@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		692A2B5E2A8E53F50053BD83 /* webrtcLib.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 692A2B5D2A8E53F50053BD83 /* webrtcLib.xcframework */; };
+		693B676C2AC17508006B3796 /* ringing.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 693B676B2AC17508006B3796 /* ringing.mp3 */; };
 		69535F682A963159004BAA51 /* VideoFileReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69535F672A963159004BAA51 /* VideoFileReader.swift */; };
 		695F5C002A96E1300040A2CD /* offer.h264 in Resources */ = {isa = PBXBuildFile; fileRef = 695F5BFF2A96E11F0040A2CD /* offer.h264 */; };
 		697CBAF02AB3482E00F9D8E7 /* AudioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697CBAEF2AB3482E00F9D8E7 /* AudioViewController.swift */; };
@@ -17,6 +18,8 @@
 		697ECB992A8F756300E2E07A /* H264Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697ECB932A8F756300E2E07A /* H264Unit.swift */; };
 		697ECB9A2A8F756300E2E07A /* H264Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697ECB942A8F756300E2E07A /* H264Encoder.swift */; };
 		697ECB9D2A8F756300E2E07A /* NALUParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697ECB972A8F756300E2E07A /* NALUParser.swift */; };
+		69A339F32AC0350500583F65 /* UIVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A339F22AC0350500583F65 /* UIVideoViewController.swift */; };
+		69A339F52AC0353D00583F65 /* UIAudioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A339F42AC0353D00583F65 /* UIAudioViewController.swift */; };
 		69BC76AD2AB6A2540084B19C /* FinalCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BC76AC2AB6A2540084B19C /* FinalCallViewController.swift */; };
 		69BC76AF2AB6A9BE0084B19C /* output.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 69BC76AE2AB6A9AA0084B19C /* output.ogg */; };
 		69EA25BA2A907B3B007DA7F8 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 69EA25B92A907B26007DA7F8 /* libresolv.tbd */; };
@@ -36,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		692A2B5D2A8E53F50053BD83 /* webrtcLib.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = webrtcLib.xcframework; path = bin/webrtcLib.xcframework; sourceTree = "<group>"; };
+		693B676B2AC17508006B3796 /* ringing.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ringing.mp3; sourceTree = "<group>"; };
 		69535F672A963159004BAA51 /* VideoFileReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoFileReader.swift; sourceTree = "<group>"; };
 		695F5BFF2A96E11F0040A2CD /* offer.h264 */ = {isa = PBXFileReference; lastKnownFileType = file; path = offer.h264; sourceTree = "<group>"; };
 		697CBAEF2AB3482E00F9D8E7 /* AudioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioViewController.swift; sourceTree = "<group>"; };
@@ -45,6 +49,8 @@
 		697ECB932A8F756300E2E07A /* H264Unit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = H264Unit.swift; sourceTree = "<group>"; };
 		697ECB942A8F756300E2E07A /* H264Encoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = H264Encoder.swift; sourceTree = "<group>"; };
 		697ECB972A8F756300E2E07A /* NALUParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NALUParser.swift; sourceTree = "<group>"; };
+		69A339F22AC0350500583F65 /* UIVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIVideoViewController.swift; sourceTree = "<group>"; };
+		69A339F42AC0353D00583F65 /* UIAudioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAudioViewController.swift; sourceTree = "<group>"; };
 		69BC76AC2AB6A2540084B19C /* FinalCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalCallViewController.swift; sourceTree = "<group>"; };
 		69BC76AE2AB6A9AA0084B19C /* output.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = output.ogg; sourceTree = "<group>"; };
 		69EA25B92A907B26007DA7F8 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
@@ -112,6 +118,7 @@
 		69FA7D322A8E415500B9DF52 /* bsip */ = {
 			isa = PBXGroup;
 			children = (
+				693B676B2AC17508006B3796 /* ringing.mp3 */,
 				69BC76AE2AB6A9AA0084B19C /* output.ogg */,
 				69FAFC5C2AB89F09008F1EF7 /* sampleVoice48kHz.wav */,
 				695F5BFF2A96E11F0040A2CD /* offer.h264 */,
@@ -124,6 +131,8 @@
 				69F2BB4F2ABC42BB00998492 /* FinalCallViewController+video.swift */,
 				69F2BB4B2ABC424A00998492 /* FinalCallViewController+webrtc.swift */,
 				697CBAEF2AB3482E00F9D8E7 /* AudioViewController.swift */,
+				69A339F22AC0350500583F65 /* UIVideoViewController.swift */,
+				69A339F42AC0353D00583F65 /* UIAudioViewController.swift */,
 				69FA7D392A8E415500B9DF52 /* Main.storyboard */,
 				69FA7D3F2A8E415600B9DF52 /* Assets.xcassets */,
 				69FA7D412A8E415600B9DF52 /* LaunchScreen.storyboard */,
@@ -205,6 +214,7 @@
 				695F5C002A96E1300040A2CD /* offer.h264 in Resources */,
 				69FA7D432A8E415600B9DF52 /* LaunchScreen.storyboard in Resources */,
 				69FA7D402A8E415600B9DF52 /* Assets.xcassets in Resources */,
+				693B676C2AC17508006B3796 /* ringing.mp3 in Resources */,
 				69FA7D3B2A8E415500B9DF52 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -218,8 +228,10 @@
 			files = (
 				69F2BB4E2ABC428800998492 /* FinalCallViewController+audio.swift in Sources */,
 				69EA25BC2A907C5A007DA7F8 /* Util.swift in Sources */,
+				69A339F32AC0350500583F65 /* UIVideoViewController.swift in Sources */,
 				69BC76AD2AB6A2540084B19C /* FinalCallViewController.swift in Sources */,
 				69F2BB4C2ABC424A00998492 /* FinalCallViewController+webrtc.swift in Sources */,
+				69A339F52AC0353D00583F65 /* UIAudioViewController.swift in Sources */,
 				697ECB9D2A8F756300E2E07A /* NALUParser.swift in Sources */,
 				697ECB9A2A8F756300E2E07A /* H264Encoder.swift in Sources */,
 				69FA7D342A8E415500B9DF52 /* AppDelegate.swift in Sources */,
@@ -309,7 +321,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -364,7 +376,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -397,7 +409,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -417,6 +429,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USE_LOCAL_LOGIC = false;
 			};
 			name = Debug;
 		};
@@ -443,7 +456,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -463,6 +476,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USE_LOCAL_LOGIC = false;
 			};
 			name = Release;
 		};

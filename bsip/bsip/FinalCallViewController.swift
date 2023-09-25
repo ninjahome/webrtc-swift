@@ -18,7 +18,7 @@ class FinalCallViewController: UIViewController {
         var isSpeaker:Bool!
         var audioRecover:AudioRecover!
         var hasVideoChannel:Bool = false
-        var host:String = "http://192.168.1.122:50000/sdp"
+        
         var muteLocal:Bool = false
         var muteRemote:Bool = false
         
@@ -34,6 +34,7 @@ class FinalCallViewController: UIViewController {
                 super.viewDidLoad()
                 self.hideKeyboardWhenTappedAround()
                 
+#if USE_LOCAL_LOGIC
                 do{
                         try initAudioEngine()
                         initVidoeEngine()
@@ -41,6 +42,8 @@ class FinalCallViewController: UIViewController {
                 }catch let err{
                         print("------>>> init system err:", err.localizedDescription)
                 }
+#endif
+                
         }
         
         override func viewWillAppear(_ animated: Bool) {
@@ -60,16 +63,15 @@ class FinalCallViewController: UIViewController {
         
         
         @IBAction func startAudioCall(_ sender: UIButton) {
-                self.hasVideoChannel = false
                 startAudioCall(isCaller: true)
         }
         
         @IBAction func answerAudioCall(_ sender: UIButton) {
-                self.hasVideoChannel = false
                 startAudioCall(isCaller: false)
         }
         
         private func startAudioCall(isCaller:Bool){
+#if USE_LOCAL_LOGIC
                 self.hasVideoChannel = false
                 var err:NSError?
                 WebrtcLibStartCall(self.hasVideoChannel, isCaller, "alice-to-bob", self, &err)
@@ -77,10 +79,18 @@ class FinalCallViewController: UIViewController {
                         print("------>>> start audio call failed \(e.localizedDescription)")
                         return
                 }
+#else
+                guard  let vc = storyboard?.instantiateViewController(withIdentifier: "UIAudioViewController") as? UIAudioViewController else{
+                        return
+                }
+                vc.modalPresentationStyle = .fullScreen
+                vc.isCaller = isCaller
+                self.present(vc, animated: true)
+#endif
         }
         
         @IBAction func startVideoCall(_ sender: UIButton) {
-                self.startVideoCall(isCaller: true)
+                                self.startVideoCall(isCaller: true)
         }
         
         @IBAction func answerVideoCall(_ sender: UIButton) {
@@ -113,6 +123,19 @@ class FinalCallViewController: UIViewController {
         @IBAction func mutePeer(_ sender: UIButton) {
                 muteRemote = !muteRemote
         }
+//        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//                if segue.identifier == "ShowUIAudioViewControllerSEG"{
+//                        guard let vc = segue.destination as? UIAudioViewController else{
+//                                return
+//                        }
+//                        vc.isCaller = true
+//                }else if segue.identifier == "ShowUIAudioViewControllerSEG"{
+//                        guard let vc = segue.destination as? UIAudioViewController else{
+//                                return
+//                        }
+//                        vc.isCaller = false
+//                }
+//        }
 }
 
 //MARK: - business logic

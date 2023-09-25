@@ -152,6 +152,111 @@
             <point key="canvasLocation" x="1764" y="-725"/>
         </scene>
         <!--Audio View Controller-->
+        <scene sceneID="K7k-rr-eto">
+            <objects>
+                <viewController storyboardIdentifier="UIAudioViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YLf-d2-nH1" customClass="UIAudioViewController" customModule="bsip" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="z99-Zh-aj6">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sih-a3-pJx">
+                                <rect key="frame" x="149.66666666666666" y="654" width="94" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="EzL-Iy-qla"/>
+                                    <constraint firstAttribute="height" constant="44" id="hqu-dw-faS"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="ringoff" imagePlacement="top" subtitle="取消">
+                                    <fontDescription key="subtitleFontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="16"/>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="EndAudioCall:" destination="YLf-d2-nH1" eventType="touchUpInside" id="daI-us-JsJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yeo-QD-Cdl">
+                                <rect key="frame" x="20" y="654" width="94" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="3CR-YK-hBD"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="hjk-wm-Dg9"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="microphone_o" imagePlacement="top" title="麦克已开">
+                                    <fontDescription key="titleFontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="16"/>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="turnOnOffMicAct:" destination="YLf-d2-nH1" eventType="touchUpInside" id="K3e-TF-KR7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Znt-yF-qQm">
+                                <rect key="frame" x="269" y="654" width="104" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="00J-nw-E0l"/>
+                                    <constraint firstAttribute="height" constant="44" id="XeW-dE-EPk"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="speaker_c" imagePlacement="top" title="扬声器已关">
+                                    <fontDescription key="titleFontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="16"/>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="turnOnOffSpeaker:" destination="YLf-d2-nH1" eventType="touchUpInside" id="vKE-Ti-DAK"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="trV-C0-Fe4"/>
+                        <color key="backgroundColor" systemColor="scrollViewTexturedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Yeo-QD-Cdl" firstAttribute="leading" secondItem="z99-Zh-aj6" secondAttribute="leading" constant="20" id="Ce4-z8-Pcd"/>
+                            <constraint firstItem="trV-C0-Fe4" firstAttribute="bottom" secondItem="Sih-a3-pJx" secondAttribute="bottom" constant="120" id="NXL-1s-rkF"/>
+                            <constraint firstItem="Znt-yF-qQm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Sih-a3-pJx" secondAttribute="trailing" constant="8" symbolic="YES" id="SVw-er-bY1"/>
+                            <constraint firstItem="Sih-a3-pJx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Yeo-QD-Cdl" secondAttribute="trailing" constant="8" symbolic="YES" id="lXy-VP-yj9"/>
+                            <constraint firstAttribute="trailing" secondItem="Znt-yF-qQm" secondAttribute="trailing" constant="20" id="nLh-aj-gfl"/>
+                            <constraint firstItem="trV-C0-Fe4" firstAttribute="bottom" secondItem="Znt-yF-qQm" secondAttribute="bottom" constant="120" id="pYr-cg-l3o"/>
+                            <constraint firstItem="Sih-a3-pJx" firstAttribute="centerX" secondItem="z99-Zh-aj6" secondAttribute="centerX" id="rNi-yS-nRe"/>
+                            <constraint firstItem="trV-C0-Fe4" firstAttribute="bottom" secondItem="Yeo-QD-Cdl" secondAttribute="bottom" constant="120" id="rru-Xs-U0v"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="PyA-9t-kzP"/>
+                    <connections>
+                        <outlet property="micPhoneBtn" destination="Yeo-QD-Cdl" id="hpe-jI-SjC"/>
+                        <outlet property="speakerBtn" destination="Znt-yF-qQm" id="7A9-D0-sja"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YwT-aN-yhP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2568.7022900763359" y="-294.36619718309862"/>
+        </scene>
+        <!--Video View Controller-->
+        <scene sceneID="mhB-VR-PFm">
+            <objects>
+                <viewController restorationIdentifier="UIVideoViewController" storyboardIdentifier="UIVideoViewController" id="v2H-k9-GkB" customClass="UIVideoViewController" customModule="bsip" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bZ-wb-sg2">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IG5-PX-zcX">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="RxM-eO-1Vf"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="RxM-eO-1Vf" firstAttribute="trailing" secondItem="IG5-PX-zcX" secondAttribute="trailing" id="X2C-6g-6qe"/>
+                            <constraint firstItem="RxM-eO-1Vf" firstAttribute="bottom" secondItem="IG5-PX-zcX" secondAttribute="bottom" id="Xp4-UI-mId"/>
+                            <constraint firstItem="IG5-PX-zcX" firstAttribute="leading" secondItem="RxM-eO-1Vf" secondAttribute="leading" id="bsJ-2q-Efe"/>
+                            <constraint firstItem="IG5-PX-zcX" firstAttribute="top" secondItem="RxM-eO-1Vf" secondAttribute="top" id="e0n-ik-Urm"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="xQt-dn-OlU"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ubX-SF-zi6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2569" y="-1010"/>
+        </scene>
+        <!--Audio View Controller-->
         <scene sceneID="e2N-r1-SfM">
             <objects>
                 <viewController id="ymc-kc-MJR" customClass="AudioViewController" customModule="bsip" customModuleProvider="target" sceneMemberID="viewController">
@@ -450,6 +555,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="microphone_o" width="70" height="70"/>
+        <image name="ringoff" width="70" height="70"/>
+        <image name="speaker_c" width="70" height="70"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
@@ -458,6 +566,9 @@
         </systemColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="scrollViewTexturedBackgroundColor">
+            <color red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

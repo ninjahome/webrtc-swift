@@ -32,8 +32,6 @@ class UIAudioViewController: UIViewController {
                 super.viewDidAppear(animated)
                 self.playCallRing()
                 self.audioProcessQueue.async { [self] in
-                        audioEngine = AVAudioEngine()
-                        audioPlayer = AVAudioPlayerNode()
                         initAudioEngine()
                         startAudioCall(isCaller: self.isCaller)
                 }
@@ -72,10 +70,10 @@ class UIAudioViewController: UIViewController {
                 self.micStatusOn = !self.micStatusOn
                 if self.micStatusOn{
                         micPhoneBtn.setImage(UIImage(named: "microphone_o"), for: .normal)
-                        speakerBtn.setTitle("麦克已开", for: .normal)
+                        micPhoneBtn.setTitle("麦克已开", for: .normal)
                 }else{
                         micPhoneBtn.setImage(UIImage(named:"microphone_c"), for: .normal)
-                        speakerBtn.setTitle("麦克已关", for: .normal)
+                        micPhoneBtn.setTitle("麦克已关", for: .normal)
                 }
         }
 }
@@ -101,6 +99,7 @@ extension UIAudioViewController{
                         try AVAudioSession.sharedInstance().overrideOutputAudioPort(.none)
                         try AVAudioSession.sharedInstance().setActive(true)
                         
+                        audioEngine = AVAudioEngine()
                         let input = audioEngine.inputNode
                         try input.setVoiceProcessingEnabled(true)
                         
@@ -120,6 +119,7 @@ extension UIAudioViewController{
                         }
                         audioRecover = c
                         
+                        audioPlayer = AVAudioPlayerNode()
                         audioEngine.attach(audioPlayer)
                         
                         audioEngine.connect(audioPlayer,
@@ -171,11 +171,15 @@ extension UIAudioViewController:WebrtcLibCallBackProtocol{
         }
         
         func connected() {
-                try! audioEngine.start()
-                audioPlayer.play()
-                
-                audioEngine.stop()
-                ringingPlayer?.stop()
+                do{
+                        try audioEngine.start()
+                        audioPlayer.play()
+                        ringingPlayer?.stop()
+                }catch let err{
+                        print("------>>> start audio engine failed:",err.localizedDescription)
+                        WebrtcLibEndCallByController()
+                        self.resetDevice()
+                }
         }
         
         func disconnected() {

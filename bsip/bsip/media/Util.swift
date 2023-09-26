@@ -11,7 +11,7 @@ import AVFAudio
 
 let NotifySceneBecomeActive = NSNotification.Name(rawValue:"scene_become_active")
 let NotifySceneDidEnterBackground = NSNotification.Name(rawValue:"scene_did_enter_background")
-public let RelayHostUrl:String = "http://192.168.1.122:50000/sdp"
+public let RelayHostUrl:String = "http://43.138.18.5:50000/sdp"
 extension UIViewController {
         
         @objc func dismissKeyboard() {

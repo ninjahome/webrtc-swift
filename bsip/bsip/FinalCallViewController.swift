@@ -90,7 +90,7 @@ class FinalCallViewController: UIViewController {
         }
         
         @IBAction func startVideoCall(_ sender: UIButton) {
-                                self.startVideoCall(isCaller: true)
+                self.startVideoCall(isCaller: true)
         }
         
         @IBAction func answerVideoCall(_ sender: UIButton) {
@@ -99,9 +99,10 @@ class FinalCallViewController: UIViewController {
         }
         
         private func startVideoCall(isCaller:Bool){
+#if USE_LOCAL_LOGIC
                 self.hasVideoChannel = true
-                view.layer.addSublayer(peerLayer)
-                view.layer.addSublayer(selfLayer)
+                view.layer.addSublayer(frontTopLayer)
+                view.layer.addSublayer(backgroundLayer)
                 var err:NSError?
                 WebrtcLibStartCall(self.hasVideoChannel, isCaller, "alice-to-bob", self, &err)
                 if let e = err{
@@ -110,6 +111,14 @@ class FinalCallViewController: UIViewController {
                 }
                 try! videoEncoder.configureCompressSession()
                 captureManager.startSession()
+#else
+                guard  let vc = storyboard?.instantiateViewController(withIdentifier: "UIVideoViewController") as? UIVideoViewController else{
+                        return
+                }
+                vc.modalPresentationStyle = .fullScreen
+                vc.isCaller = isCaller
+                self.present(vc, animated: true)
+#endif
         }
         
         @IBAction func switchSpeaker(_ sender: UIButton) {
@@ -123,19 +132,19 @@ class FinalCallViewController: UIViewController {
         @IBAction func mutePeer(_ sender: UIButton) {
                 muteRemote = !muteRemote
         }
-//        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//                if segue.identifier == "ShowUIAudioViewControllerSEG"{
-//                        guard let vc = segue.destination as? UIAudioViewController else{
-//                                return
-//                        }
-//                        vc.isCaller = true
-//                }else if segue.identifier == "ShowUIAudioViewControllerSEG"{
-//                        guard let vc = segue.destination as? UIAudioViewController else{
-//                                return
-//                        }
-//                        vc.isCaller = false
-//                }
-//        }
+        //        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //                if segue.identifier == "ShowUIAudioViewControllerSEG"{
+        //                        guard let vc = segue.destination as? UIAudioViewController else{
+        //                                return
+        //                        }
+        //                        vc.isCaller = true
+        //                }else if segue.identifier == "ShowUIAudioViewControllerSEG"{
+        //                        guard let vc = segue.destination as? UIAudioViewController else{
+        //                                return
+        //                        }
+        //                        vc.isCaller = false
+        //                }
+        //        }
 }
 
 //MARK: - business logic

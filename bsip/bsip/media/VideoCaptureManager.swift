@@ -27,7 +27,7 @@ class VideoCaptureManager {
         
         private let session = AVCaptureSession()
         private let videoOutput = AVCaptureVideoDataOutput()
-        
+        private var videoDeviceInput:AVCaptureDeviceInput!
         // MARK: - DispatchQueues to make the most of multithreading
         
         private let sessionQueue = DispatchQueue(label: "session.queue")
@@ -46,6 +46,8 @@ class VideoCaptureManager {
         }
         
         func stop(){
+                session.removeOutput(videoOutput)
+                session.removeInput(videoDeviceInput)
                 session.stopRunning()
         }
         
@@ -81,14 +83,14 @@ class VideoCaptureManager {
                         }
                         
                         guard let videoDevice = defaultVideoDevice else {
-                                print("Default video device is unavailable.")
+                                print("------>>>Default video device is unavailable.")
                                 setupResult = .configurationFailed
                                 session.commitConfiguration()
                                 
                                 throw ConfigurationError.defaultDeviceNotExist
                         }
                         
-                        let videoDeviceInput = try AVCaptureDeviceInput(device: videoDevice)
+                        videoDeviceInput = try AVCaptureDeviceInput(device: videoDevice)
                         
                         if session.canAddInput(videoDeviceInput) {
                                 session.addInput(videoDeviceInput)
@@ -152,7 +154,7 @@ class VideoCaptureManager {
                 return self.session.isInterrupted
         }
         
-        func startSession() {
+        func startSession() ->Error?{
                 
                 switch self.setupResult {
                 case .success:
@@ -160,10 +162,13 @@ class VideoCaptureManager {
                         sessionQueue.async {
                                 self.session.startRunning()
                         }
+                        return nil
                 case .notAuthorized:
                         print("camera usage not authorized")
+                        return NSError(domain: "video not authorized", code: -1)
                 case .configurationFailed:
                         print("configuration failed")
+                        return NSError(domain: "video configuration failed", code: -2)
                 }
         }
         

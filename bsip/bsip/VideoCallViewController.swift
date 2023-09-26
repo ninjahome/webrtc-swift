@@ -94,7 +94,9 @@ class VideoCallViewController: UIViewController {
                                 throw e
                         }
                         try videoEncoder.configureCompressSession()
-                        captureManager.startSession()
+                        if let err = captureManager.startSession(){
+                                throw err
+                        }
                         
                 }catch let e{
                         print("------>>>startVideoAction:",e.localizedDescription)
@@ -129,7 +131,9 @@ class VideoCallViewController: UIViewController {
                         }
                         
                         try videoEncoder.configureCompressSession()
-                        captureManager.startSession()
+                        if let e = captureManager.startSession(){
+                                throw e
+                        }
                         
                         
                 }catch let err{
